@@ -1,0 +1,105 @@
+body {
+    background: #fefefe;
+    color: #222;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #0026ff;
+}
+
+.languages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 5vh;
+    margin-bottom: 1vh;
+    flex-flow: row wrap;
+}
+
+.languages * {
+    white-space: nowrap;
+    margin: 1em;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 13vh;
+    margin-bottom: 3vh;
+}
+
+header h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+header .whatido {
+    display: inline-block;
+    font-size: 0.5em;
+    white-space: nowrap;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    align-content: center;
+    font-size: 1.3em;
+    min-height: 13vh;
+    flex-flow: row wrap;
+}
+
+.links .link {
+    padding: 1em;
+}
+
+.links a, .languages a {
+    text-decoration: none;
+    border-bottom: 2px solid #0026ff;
+    padding-bottom: 0.2em;
+}
+
+
+.links .link .active {
+    font-size: 2.5em;
+}
+
+.content {
+    margin-left: 10%;
+    width: 80%;
+    min-height: 300px;
+    float: left;
+    line-height: 1.3em;
+}
+
+@media (max-width: 600px) {
+    .content {
+        margin-left: 2%;
+        width: 96%;
+    }
+}
+
+.error-code {
+    width: 50vw;
+    height: 50vh;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.error-code h1 {
+    font-size: 1.5em;
+}
+
+
+
+/*# sourceMappingURL=app.css.map*/
