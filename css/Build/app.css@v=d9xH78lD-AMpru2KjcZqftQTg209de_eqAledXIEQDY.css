@@ -147,6 +147,19 @@
   .cursor.is-visible { opacity: 1; }
   .cursor.is-hover { width: 28px; height: 28px; }
 
+  /* Red square dot — cloned from each HELLO. / RÉSUMÉ. / VK. glyph */
+  .scroll-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--c-red);
+    pointer-events: none;
+    user-select: none;
+    z-index: 9998;
+    transform: translate3d(-80px, -80px, 0);
+    will-change: transform, opacity, width, height;
+  }
+
   /* Header */
   .site-header {
     padding-block: var(--s-5) var(--s-4);
@@ -367,7 +380,7 @@
       scroll-behavior: auto !important;
     }
     [data-reveal] { opacity: 1; transform: none; }
-    #bg, .cursor { display: none !important; }
+    #bg, .cursor, .scroll-dot { display: none !important; }
   }
   @media (prefers-reduced-data: reduce) { #bg { display: none; } }
 }
@@ -427,7 +440,7 @@
     @page { margin: 18mm; }
     * { background: transparent !important; color: #000 !important; box-shadow: none !important; }
     body { background: #fff; font-size: 11pt; line-height: 1.4; }
-    #bg, .cursor, .site-header nav, .site-header .lang, .site-footer,
+    #bg, .cursor, .scroll-dot, .site-header nav, .site-header .lang, .site-footer,
     .hero .gutter-label, .hero .portrait { display: none !important; }
     .rule, .rule-red { background: #000 !important; }
     .display { font-size: 22pt; }

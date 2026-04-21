@@ -199,10 +199,94 @@
   }
 
   /* --------------------------------------------------------------------- */
+  /* One red square — launches from the VK. glyph, weaves to cursor, becomes cursor bg */
+  function scrollDot() {
+    if (isTouch()) return;
+    const sources = document.querySelectorAll('.display .dot');
+    sources.forEach((s) => { s.style.visibility = 'hidden'; });
+
+    const SIZE = 16;
+    const dot = document.createElement('div');
+    dot.className = 'scroll-dot';
+    dot.setAttribute('aria-hidden', 'true');
+    dot.style.width = SIZE + 'px';
+    dot.style.height = SIZE + 'px';
+    document.body.appendChild(dot);
+
+    const source = sources[0];
+    let originX = window.innerWidth * 0.05, originY = 40;
+    if (source) {
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      const rr = range.getBoundingClientRect();
+      const cs = getComputedStyle(source);
+      const fs = parseFloat(cs.fontSize);
+      const lhPx = parseFloat(cs.lineHeight);
+      const lhRatio = isNaN(lhPx) ? 1.2 : lhPx / fs;
+      const halfLeading = (lhRatio - 1) * fs / 2;
+
+      let baselineY = rr.top + fs * 0.76 + halfLeading;
+      let capH = fs * 0.72;
+      try {
+        const ctx = document.createElement('canvas').getContext('2d');
+        ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        const m = ctx.measureText('M');
+        if (m.fontBoundingBoxAscent) baselineY = rr.top + m.fontBoundingBoxAscent + halfLeading;
+        if (m.actualBoundingBoxAscent) capH = m.actualBoundingBoxAscent;
+      } catch (_) {}
+
+      originX = rr.left + rr.width / 2;
+      originY = baselineY - SIZE / 2;
+    }
+    const pos = { x: originX, y: originY };
+    let cx = originX, cy = originY;
+    let gotCursor = false;
+    let startT = 0;
+
+    const render = (x, y, op) => {
+      dot.style.opacity = op;
+      dot.style.transform = `translate3d(${x - SIZE / 2}px, ${y - SIZE / 2}px, 0)`;
+    };
+
+    render(pos.x, pos.y, 1);
+
+    window.addEventListener('pointermove', (e) => {
+      cx = e.clientX; cy = e.clientY;
+      if (!gotCursor) { gotCursor = true; startT = performance.now(); }
+    }, { passive: true });
+
+    const tick = (t) => {
+      if (!gotCursor) {
+        render(pos.x, pos.y, 1);
+      } else {
+        const elapsed = (t - startT) / 1000;
+        const dx = cx - pos.x, dy = cy - pos.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        if (elapsed < 1.6) {
+          pos.x += dx * 0.06;
+          pos.y += dy * 0.06;
+          const nx = -dy / dist, ny = dx / dist;
+          const amp = 80 * Math.exp(-elapsed * 1.1);
+          const wave = Math.sin(elapsed * 8) * amp;
+          const k = Math.min(1, elapsed / 1.4);
+          render(pos.x + nx * wave, pos.y + ny * wave, 1 - 0.5 * k);
+        } else {
+          pos.x += dx * 0.22;
+          pos.y += dy * 0.22;
+          render(pos.x, pos.y, 0.5);
+        }
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* --------------------------------------------------------------------- */
   onReady(() => {
     scrollReveal();
     if (!reducedMotion()) parallax();
     if (!reducedMotion()) initCanvas();
-    if (!reducedMotion() && !isTouch()) { cursor(); magnetic(); }
+    if (!reducedMotion() && !isTouch()) magnetic();
+    if (!reducedMotion()) scrollDot();
   });
 })();
