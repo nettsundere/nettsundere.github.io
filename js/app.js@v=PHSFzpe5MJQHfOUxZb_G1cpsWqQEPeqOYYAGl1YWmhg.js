@@ -19,25 +19,6 @@
   };
 
   /* --------------------------------------------------------------------- */
-  /* Scroll reveals */
-  function scrollReveal() {
-    const els = document.querySelectorAll('[data-reveal]');
-    if (!els.length || !('IntersectionObserver' in window)) {
-      els.forEach((el) => el.classList.add('is-visible'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
-      }
-    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-    els.forEach((el) => io.observe(el));
-  }
-
-  /* --------------------------------------------------------------------- */
   /* Parallax on portrait */
   function parallax() {
     const target = document.querySelector('.portrait-frame img');
@@ -283,7 +264,6 @@
 
   /* --------------------------------------------------------------------- */
   onReady(() => {
-    scrollReveal();
     if (!reducedMotion()) parallax();
     if (!reducedMotion()) initCanvas();
     if (!reducedMotion() && !isTouch()) magnetic();
