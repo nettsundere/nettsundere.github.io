@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Забавные подходы к компьютерной безопасности &#8594; Владимир Киселев</title>
+  <meta name="description" content="Теоретические &laquo;добрые&raquo; способы запутать и задержать атакующего вместо пассивной обороны.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Забавные подходы к компьютерной безопасности">
+  <meta property="og:description" content="Теоретические &laquo;добрые&raquo; способы запутать и задержать атакующего вместо пассивной обороны.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Забавные подходы к компьютерной безопасности">
+  <meta name="twitter:description" content="Теоретические &laquo;добрые&raquo; способы запутать и задержать атакующего вместо пассивной обороны.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Забавные подходы к компьютерной безопасности",
+    "datePublished": "2019-06-02",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "isBasedOn": "https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/02-06-2019-funny-approaches-to-the-computer-security.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-06-02">2 июня 2019</time></p>
+      <h1 class="post-title">Забавные подходы к компьютерной безопасности<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p><em>Забавные теоретические подходы к компьютерной безопасности</em></p><figure><img alt="" src="../../images/blog/cf8SVmWk8uUsDmh7ittwLQ.jpeg" /></figure><p>На днях я размышлял о забавных теоретических подходах к компьютерной безопасности. Знаете, обычно защита &mdash; это пассивные вещи: пароли, ключи, логирование и иногда безопасность через неясность, файрволы и разные средства защиты от взлома. Защита обычно довольно пассивна. Вы сидите и ждёте, хорошо подготовленные и готовые защищаться от атакующего. Но становится забавнее, когда всё немного иначе. Дисклеймер: говорить будем только о теоретических &laquo;добрых&raquo; (lawful-good) подходах.</p><p>Представьте следующие сценарии:</p><ul><li>Сервер делает вид, что атака удалась, а затем атакует противника. Обратная атака может быть фишингом, чтобы украсть пароль атакующего (просто вежливо его попросив или притворившись SUDO-приглашением атакующего, а затем, возможно, подключившись по SSH обратно), запутыванием атакующего, чтобы заставить его раскрыть свой настоящий IP (печатая несуществующие коды ошибок, которые он будет гуглить и читать о них в поддельном мануале). Ещё пример: у вас есть настоящий SSH, скрытый с помощью port knocking (см. <a href="https://en.wikipedia.org/wiki/Port_knocking">https://en.wikipedia.org/wiki/Port_knocking</a>), и поддельный SSH-сервер, отвечающий на стандартном порту. Поддельный сервер может делать многое: давать атакующему ложную информацию, раскрывать ложные сетевые детали и предоставлять поддельные инструменты для всего описанного выше.</li><li>Сервер усложняет брутфорс, брутфорся в ответ. Сервер может использовать те же данные, которыми его брутфорсили, для такого ответа.</li><li>Сервер усложняет подключение к себе, запуская DDoS-атаку на клиент атакующего.</li><li>На сервере есть кастомные VIM-скрипты, которые могут запутать неавторизованного человека, сделав использование VIM невозможным (это случилось со мной, только я был авторизован, а мой коллега поставил свои VIM-скрипты на сервер, сделав VIM непригодным для меня. Я люблю VIM).</li><li>Можно использовать робота, чтобы физически отключать сервер от сети во время простоя</li><li>Поддельный сервер можно подключать во время простоя</li><li>Робота можно запускать по подозрительным действиям на сервере</li><li>Машинное обучение (точнее, обучение) можно использовать для идентификации атакующего (просто по набору команд терминала, выполняемых на сервере). И снова его можно физически отключить роботом.</li><li>Хорошо, вместо робота можно просто использовать файрвол или балансировщик, но робот просто забавнее</li><li>Сетевые характеристики атакующего можно использовать для его идентификации</li><li>Сервер может распознать бот-DDoS и попытаться использовать похожие уязвимости, что применялись для угона ботов, но вместо угона &mdash; чтобы <em>вылечить</em> бота, запустив антивирусную атаку: развернуть и запустить антивирус на боте, атакующем сервер. Чтобы это оставалось на светлой стороне &mdash; я предполагаю, что мы лечим только ботов/компьютеры, принадлежащие стороне защиты.</li><li>Сервер может запутать атакующего, выводя непонятное SSH-сообщение, притворяясь холодильником или чем-то ещё, что также может вести атакующего к специально подготовленным man-страницам или чему-то подобному в интернете</li><li>Сервер может периодически сообщать, что он знает о ваших нехороших делах и что ГРУППА вас проверяет. Даже если никакой ГРУППЫ вообще нет.</li><li>Сервер может лгать атакующему, притворяясь поддельным. Лгать нормально, особенно когда кто-то пытается вас ограбить.</li></ul><p>и</p><ul><li>Также можно изредка выводить S&#x361;&#x32f;&#x32f;&#x33a;&#x325;&#x318;&#x32b;&#x353;&#x32c;&#x31f;&#x34e;C&#x336;&#x308;&#x301;A&#x30e;&#x36e;&#x350;R&#x36f;Y &#x55;&#x4e;&#x49;C&#x4f;&#x44;&#x45; M&#x45;S&#x53;A&#x47;E&#x53; (страшные искажённые символы) &mdash; в духе оригинала.</li></ul>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec" rel="nofollow">https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <a class="prev" href="12-02-2019-its-time-to-let-the-develop-branch-go.html"><span class="nav-label">&#8592; Раньше</span><span class="nav-title">Пора отпустить ветку develop</span></a>
+  <a class="next" href="22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"><span class="nav-label">Позже &#8594;</span><span class="nav-title">О том, как &laquo;продать идею&raquo; изменения в проекте, над которым работаешь</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

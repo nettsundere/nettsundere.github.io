@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>О сокращении конфликтов слияния в&nbsp;&laquo;Changelog&raquo; &#8594; Владимир Киселев</title>
+  <meta name="description" content="Подход на основе структуры каталогов, устраняющий конфликты слияния в CHANGELOG.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="О сокращении конфликтов слияния в&nbsp;&laquo;Changelog&raquo;">
+  <meta property="og:description" content="Подход на основе структуры каталогов, устраняющий конфликты слияния в CHANGELOG.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="О сокращении конфликтов слияния в&nbsp;&laquo;Changelog&raquo;">
+  <meta name="twitter:description" content="Подход на основе структуры каталогов, устраняющий конфликты слияния в CHANGELOG.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "О сокращении конфликтов слияния в «Changelog»",
+    "datePublished": "2015-06-08",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "isBasedOn": "https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-06-08">8 июня 2015</time></p>
+      <h1 class="post-title">О сокращении конфликтов слияния в&nbsp;&laquo;Changelog&raquo;<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>Существует немало попыток сократить количество конфликтов в changelog. Ни одна из них у меня не работает. Кроме одной новой.</p><p><strong><em>tl;dr</em></strong><em> На помощь приходит структура каталогов: </em><a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p><ul><li>Кто-то использует <strong>заглушки (placeholders)</strong>. Хорошая идея.</li></ul><blockquote>&laquo;В GitLab мы решили эту проблему, добавив 100 строк с простым дефисом-заглушкой в начало changelog.&raquo; <a href="https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/"><em>https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/</em></a></blockquote><ul><li>Кто-то использует <strong>другую стратегию слияния</strong> для одного файла (merge=union). Это хорошая идея, когда каждая строка вашего changelog всегда уникальна. И плохая, когда в changelog есть не очень уникальные окончания. Тогда всё может просто пойти не так. И никто этого не заметит. Все похожие строки могут быть молча слиты в одну при разрешении конфликта.</li></ul><p>Иногда я просто трачу часы своего времени на исправление конфликтов слияния в CHANGELOG. Да. Давайте исправим это с помощью двумерного файлового хранилища под названием <em>папки</em>.</p><p>Мы связываем одну фичу с её записью в changelog (файлом), принадлежащей некоторой версии (папке).</p><figure><img alt="" src="../../images/blog/dmNlF5JdH9VAJUcLsBgopA.png" /></figure><p>Теперь мы можем легко управлять этими изменениями changelog. Мы можем откатить коммит фичи. Ничего плохого не происходит. Мы можем добавлять фичи в ту же ветку вообще без конфликтов. Запись changelog может быть настолько сложной, насколько вам захочется.</p><p>Теперь можно перестать добавлять пробелы, съеденные настройками вашего редактора, лишь бы не мешать чужим изменениям. Теперь люди могут быть счастливы вместо того, чтобы делать rebase каждый раз, когда вы принимаете очередной pull request.</p><figure><img alt="" src="../../images/blog/JdlwBWcle9TciPe6IgFrHQ.png" /><figcaption>Вот как изменение фичи выглядит теперь в diff. Видны только значимые изменения.</figcaption></figure><h3>Необходимое ПО</h3><p>На самом деле для этой стратегии не нужно никакого ПО. Но хорошо бы видеть весь changelog или версию целиком. Поэтому я решил создать проект под названием &laquo;Cyberlog&raquo;.</p><figure><img alt="" src="../../images/blog/gvwWxsBzOy6ksr4A_qlTLw.png" /><figcaption>Экран справки Cyberlog</figcaption></figure><p>Пока здесь ограниченный набор возможностей. Вы можете работать с записями и версиями. Можно посмотреть изменения какой-то версии, записи или все изменения сразу.</p><h3>Что предстоит сделать</h3><ul><li>Настройка через шаблонизатор (интеграция для хипстеров)</li><li>Интеграция с SCM (git-blame и прочее)</li><li>Опция конвертации (полезно, чтобы перенести старый CHANGELOG в новый, поддерживаемый Cyberlog)</li><li>Разные презентеры (вдруг вам нужен pdf?)</li></ul><h3>Чего делать не стоит</h3><ul><li>Функцию редактирования записи. Вам <em>следует использовать</em> свой любимый текстовый редактор для правки логов. Даже photoshop выглядит неплохо. Я могу представить changelog, наполненный осмысленными картинками, видео и аудио, объясняющими изменения.</li></ul><p>Исходный код проекта (BSD3) доступен здесь: <a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b" rel="nofollow">https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <span></span>
+  <a class="next" href="25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"><span class="nav-label">Позже &#8594;</span><span class="nav-title">Реализация операций Min и Max для чисел с плавающей точкой</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

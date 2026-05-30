@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>On reducing &ldquo;Changelog&rdquo; merge conflicts &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="A directory-structure approach to eliminating CHANGELOG merge conflicts.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="On reducing &ldquo;Changelog&rdquo; merge conflicts">
+  <meta property="og:description" content="A directory-structure approach to eliminating CHANGELOG merge conflicts.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="On reducing &ldquo;Changelog&rdquo; merge conflicts">
+  <meta name="twitter:description" content="A directory-structure approach to eliminating CHANGELOG merge conflicts.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "On reducing “Changelog” merge conflicts",
+    "datePublished": "2015-06-08",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "isBasedOn": "https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-06-08">8 June 2015</time></p>
+      <h1 class="post-title">On reducing &ldquo;Changelog&rdquo; merge conflicts<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>There are number of attempts to reduce amount of changelog conflicts. All of them are not working for me. Except new one.</p><p><strong><em>tl;dr</em></strong><em> Directory structure to the rescue: </em><a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p><ul><li>Some people use <strong>placeholders</strong>. Good idea.</li></ul><blockquote>“At GitLab we solved the above problem by adding a 100 lines with just a hyphen placeholder at the top of the changelog.” <a href="https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/"><em>https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/</em></a></blockquote><ul><li>Some people use <strong>different merge strategy</strong> for single file(merge=union). It is good idea to go when every line of your changelog are always unique. It is bad idea when your changelog has some not-so-unique endings. Things then can just go wrong. And nobody will notice it. All similar stirngs can be silently merged into one during conflict resolution.</li></ul><p>Sometimes i’m just spending hours of my time just by fixing CHANGELOG merge conflicts. Yep. Lets fix it using 2-dimensional file storage called <em>folders</em>.</p><p>We associate one feature with its changelog entry (file) belonging to some version (folder).</p><figure><img alt="" src="../images/blog/dmNlF5JdH9VAJUcLsBgopA.png" /></figure><p>Now we can manage this changelog changes easilly. We can revert our feature-commit. Nothing bad happens. We can add some features to the same branch without any conflicts at all. Changelog entry can be as complex as you want it.</p><p>Now you can stop adding whitespaces killed by your editor preferences just to avoid messing around with your colleagues changes. Now people can be happy instead of rebasing every time you accept one more pull-request.</p><figure><img alt="" src="../images/blog/JdlwBWcle9TciPe6IgFrHQ.png" /><figcaption>This is how feature change looks now in diff. You see only meaningful changes.</figcaption></figure><h3>Required software</h3><p>Actually there is no required software to follow this strategy. But it will be good to see entire changelog or version at once. So i decided to create project called “Cyberlog”</p><figure><img alt="" src="../images/blog/gvwWxsBzOy6ksr4A_qlTLw.png" /><figcaption>Cyberlog help screen</figcaption></figure><p>For now you can find here limited set of features. You can operate on entries and versions. You can see changes from some version, entry or all changes.</p><h3>Things to do</h3><ul><li>Customization using template engine (hipster integration)</li><li>SCM integration (git-blame and others)</li><li>Convertation option (useful to convert your old CHANGELOG to a new one, supported by Cyberlog)</li><li>Different presenters (maybe you need a pdf?)</li></ul><h3>Things not to do</h3><ul><li>Edit entry feature. You <em>should use</em> your preferred text? editor to edit logs. Even photoshop looks good enough. I can imagine changelog filled with meaningful pictures, videos and audios explaining changes.</li></ul><p>Project source code (BSD3) is available via <a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p>
+<p class="medium-note">Originally posted on Medium: <a href="https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b" rel="nofollow">https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <span></span>
+  <a class="next" href="25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"><span class="nav-label">Newer &#8594;</span><span class="nav-title">The implementation of Min and Max operations for floating-point types</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+</body>
+</html>

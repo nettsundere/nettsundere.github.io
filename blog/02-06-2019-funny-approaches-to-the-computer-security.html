@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Funny approaches to the computer security &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="Theoretical, lawful-good ways to confuse and hinder an attacker instead of just defending.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="Funny approaches to the computer security">
+  <meta property="og:description" content="Theoretical, lawful-good ways to confuse and hinder an attacker instead of just defending.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Funny approaches to the computer security">
+  <meta name="twitter:description" content="Theoretical, lawful-good ways to confuse and hinder an attacker instead of just defending.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Funny approaches to the computer security",
+    "datePublished": "2019-06-02",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "isBasedOn": "https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-06-02">2 June 2019</time></p>
+      <h1 class="post-title">Funny approaches to the computer security<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p><em>Funny theoretical approaches to the computer security</em></p><figure><img alt="" src="../images/blog/cf8SVmWk8uUsDmh7ittwLQ.jpeg" /><figcaption>Photo by <a href="https://www.pexels.com/@scottwebb?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Scott Webb </a>from <a href="https://www.pexels.com/photo/equipment-pavement-security-security-camera-430208/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><p>The other day I was thinking about funny theoretical approaches to the computer security. You know, usually the defense means passive things: passwords, keys, logging and sometimes security through obscurity, firewalls and different anti-tampering means and stuff. The defense is usually pretty much passive. You sit and wait, well prepared and ready to defend yourself from the attacker. But it makes it funnier when it’s little bit different. Disclaimer: we will be talking only about theoretical lawful-good approaches.</p><p>Imagine following scenarios:</p><ul><li>The server pretends that the attack succeeded and then attacks the foe. The reverse attack could be a phishing to steal attackers’ password (simply by asking it politely or by pretending to be a attackers’ SUDO prompt and then maybe SSH’ing back), confusing the attacker to force him to reveal their real IP (by printing non-existent error codes that will have them googling it and reading about it in a fake manual). One more example is when you have real SSH hidden by the means of port knocking (see <a href="https://en.wikipedia.org/wiki/Port_knocking">https://en.wikipedia.org/wiki/Port_knocking</a>) and a fake SSH server that responds on the standard port. The fake server may be doing a lot: providing the attacker with fake info, revealing fake network details and providing fake tools to do all this stuff explained here before.</li><li>The server makes it hard to brute force it by brute forcing back. The server can use the same data that was used to bruteforce it for such response.</li><li>The server makes it hard to attach to it by running a DDOS attack towards the attackers’ client.</li><li>The server has custom VIM scripts, which may confuse the unauthorized person by making it impossible to use VIM (this one happened to me, except that I was authorized and my teammate installed his VIM scripts to the server, making it impossible to use VIM for me. I love VIM)</li><li>One can use a robot to physically detach the server from the network during idle time</li><li>Fake server may be attached during the idle time</li><li>The robot can be triggered by suspicious actions being performed on the server</li><li>Machine learning (training to be precise) could be used to identify the attacker (using just set of terminal commands being performed on the server). Then again it could be physically detached by the robot.</li><li>Okay, you can just use a firewall or a balancer instead of a robot, but the robot is just funnier</li><li>Attackers network characteristics could be used to identify the attacker</li><li>The server may identify the bot-infused DDOS and may try to use similar vulnerabilities that were used to steal them, but instead of stealing — to cure the <em>bot</em> by dispatching an anti-virus attack: deploy and run antivirus software on the bot who attacks the server. To keep this item on a good side — I’m assuming we only cure bots/computers that belong to the defense side.</li><li>The server may confuse the attacker by displaying the obscure SSH message, pretending to be a fridge or something, which also could be leading the attacker to specially crafted manual pages or something like that in the internet</li><li>The server maybe periodically saying that it knows that you are doing bad things and THE GROUP is checking you. Even if there is no GROUP whatsoever.</li><li>The server may lie to the attacker, pretending to be a fake one. Lying is ok, especially when someone tries to rob you.</li></ul><p>and</p><ul><li>You can also occasionally print S̡̯̯̺̥̘̫͓̬̟͎͐͂ͥ̿̂̂͋ͭ̓͛̾ͭ̾̅̐ͨͥ͑͂̕C̶͈̳̪̱ͭ͋ͫͭ̀̆̈́̌̅̏̀A̶̎ͮ̐ͫ̃́̅̓̓͑̓̀͏̵̖̥͍̲̠̘̖Rͯ͑͑ͩ͏̢̠̜̜͖͕͚̞̗̘̼̬̣̀͜Y̵̩̱͙̪̲͍̣̖̹̘̲̬̬̭͌̂͗̉͛̈̀͜͞ ̴̸͚͎̯̞̼͇̯̝̣̪͙͑̒ͥͩͯ̈̔̄͋̕ͅṲ͕͍͕͎̘̭̜̲͉̆͑̉ͧ̈́ͥ̄̐ͪ̕͟͝ͅN̶̛̠̖͕̟̹͇̅͑ͮ̑̊͂̃ͦͯ͛ͧͪ̓͗ͪ̽͑͜͢͟Ḯ̴̸̷̶̢̺̼̦̹̩̪̩͚͉̘̬̘̗͍̘͎̮̞̲̐̒̆̀ͭ̾̿̒̓ͣ̉̚C̷̺̭̯̳͎͕͕̻̻̖̺̽̓̒̎̄̆̓̑̉̎̑̌̏͋̔̂ͭ͡O̢ͬͮͣ͋̑ͤ͆̚҉̹͎̱̘̤͔̲̜͔͍͚D̷̙̺̝̫̣̣̞̱͎̫̼͈͚̼ͤ̍̾̒ͣͤͮ͐ͧ̀̀ͥͬ̐́͡ͅḚ̶͙̬̥͙̙̼̥̪̦̤̠̮͐ͮ̎̒ͥ̕͟͡ ̢̢̛̬̫̣͍̇̀ͨ͒͗̔̓M͚̳̱̮̹ͭ̊̈̽̐̅̽̊̊̄̒̽͋̏̚̕͟Ȩ̡͈̬̤̖̜̲̣̠̤̪̣̭͓͈͊͋ͯ̿̋͒̌̏̎ͪ̿ͭ̊͑ͫ͋͡͡S̡̝̟͇͔̺̲͎̝̖͗ͧͦ̍͋̈̑͑̔̃̂̈́́̆̐͊̎̚͜͜͢͝ͅS͕̣̮͍̄͗̓̊͐́̈͐ͫͪ̓̈ͩ̂͆̕͠͠A͗ͩ̀ͥ͊̃̈́̓̀̄ͤ͒ͭ͑̊҉҉͔̭̟̹̯̼̪̱̥̱̪̻͔͍̬͡ͅG̴̡̛͌̋͆̑̓͋̈̿ͬ̌ͨ́ͩ̎҉̠̙̯̥̩̺̟̞̦͎̘̝̣̰ͅẺ̢́̇ͦ͂ͮ́͏͔͚̫̪̯̯̯̼̞̹̖͉̣S̶͈̹̝̦̭͙͖̘̭̥̳̩̟͙̮̩͕̍͋ͣͧͤ̚͟.</li></ul>
+<p class="medium-note">Originally posted on Medium: <a href="https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec" rel="nofollow">https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <a class="prev" href="12-02-2019-its-time-to-let-the-develop-branch-go.html"><span class="nav-label">&#8592; Older</span><span class="nav-title">It&rsquo;s time to let the develop branch go</span></a>
+  <a class="next" href="22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"><span class="nav-label">Newer &#8594;</span><span class="nav-title">On &ldquo;selling an Idea&rdquo; to change something in a project you are working on</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+</body>
+</html>

@@ -43,4 +43,158 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/kontakty.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/contact.html"/>
   </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog.html</loc>
+    <lastmod>2026-05-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html</loc>
+    <lastmod>2015-06-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html</loc>
+    <lastmod>2015-06-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html</loc>
+    <lastmod>2015-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html</loc>
+    <lastmod>2015-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html</loc>
+    <lastmod>2017-04-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/11-04-2017-a-text-is-not-that-important.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/11-04-2017-a-text-is-not-that-important.html</loc>
+    <lastmod>2017-04-11</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/11-04-2017-a-text-is-not-that-important.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html</loc>
+    <lastmod>2018-05-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/19-05-2018-how-to-downgrade-the-npm-version.html</loc>
+    <lastmod>2018-05-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html</loc>
+    <lastmod>2019-02-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html</loc>
+    <lastmod>2019-02-12</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html</loc>
+    <lastmod>2019-06-02</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html</loc>
+    <lastmod>2019-06-02</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html</loc>
+    <lastmod>2020-03-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html</loc>
+    <lastmod>2020-03-22</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html</loc>
+    <lastmod>2021-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/01-10-2021-the-peculiarities-of-json.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/01-10-2021-the-peculiarities-of-json.html</loc>
+    <lastmod>2021-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/01-10-2021-the-peculiarities-of-json.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html</loc>
+    <lastmod>2021-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html</loc>
+    <lastmod>2021-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html</loc>
+    <lastmod>2021-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+  </url>
+  <url>
+    <loc>https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html</loc>
+    <lastmod>2021-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html"/>
+  </url>
 </urlset>

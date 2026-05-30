@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The peculiarities of JSON &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="Surprising traits of a 21-year-old format: no comments, no versioning, ECMA-404.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="The peculiarities of JSON">
+  <meta property="og:description" content="Surprising traits of a 21-year-old format: no comments, no versioning, ECMA-404.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The peculiarities of JSON">
+  <meta name="twitter:description" content="Surprising traits of a 21-year-old format: no comments, no versioning, ECMA-404.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The peculiarities of JSON",
+    "datePublished": "2021-10-01",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/01-10-2021-the-peculiarities-of-json.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-10-01">1 October 2021</time></p>
+      <h1 class="post-title">The peculiarities of JSON<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<h3>JSON — the bread &amp; butter of many software developers, especially ones who do anything related to the web. Let’s talk about some of them surprising traits of it, given that the format itself is 21 years old now</h3><figure><img alt="" src="../images/blog/8xC1JcA784mDHjM_oDRlvA.jpeg" /><figcaption>Photo by <a href="https://www.pexels.com/@schneewolf?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Annika Thierfeld</a> from <a href="https://www.pexels.com/photo/photo-of-reindeer-in-the-snow-735987/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><p><em>No comments by design </em>— that means that there is no syntax for comments, so of course a lot of formats brought this back (like JSONC). The funny thing is the comments were removed from the original JSON standard.</p><p>Removing comments from the JSON was something that made <em>the YAML closer to a superset of the JSON</em>, the YAML is not something that came out many years later as many people think (*based on my observation), YAML is 20 years old already</p><p>There is <em>no safe way of extending or redefining the JSON</em> (it has no version, and it should not be changed no matter what)</p><p><em>Numbers</em>. Despite being called JSON (JSML was the first naming attempt according to Douglas Crockford) — the JSON numbers are not the JavaScript numbers. JSON numbers are not a superset of IEE-754 and etc (you cannot encode NaN, +- Infinity that are the valid values in JavaScript and many other languages), but you can define something that is a whole or (sometimes) a rational number. For other stuff you will need to use the strings (or just close your eyes and hope for the best)</p><p>Check the JSON standard name, it’s <em>ECMA-404</em> (I wonder if it’s a pun or not)</p><h3><strong>Links</strong></h3><p><strong>JSON</strong> website <a href="https://json.org">https://json.org</a> — JSON Website (JSON has a cool logo by the way)</p><p>The <strong>ECMA-404</strong> (this 404 number seems very familiar) standard for JSON <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">https://www.ecma-international.org/publications-and-standards/standards/ecma-404/</a></p><p><strong>Douglas Crockford: The JSON Saga </strong><a href="https://www.youtube.com/watch?v=-C-JoyNuQJs">https://www.youtube.com/watch?v=-C-JoyNuQJs</a> (here the JSON discoverer himself is sharing the history of the JSON and I highly recommend you to watch this, as it’s better than any Marvel movie)</p>
+<p class="medium-note">Originally posted on Medium: <a href="https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f" rel="nofollow">https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <a class="prev" href="22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"><span class="nav-label">&#8592; Older</span><span class="nav-title">On &ldquo;selling an Idea&rdquo; to change something in a project you are working on</span></a>
+  <a class="next" href="19-10-2021-the-peculiarities-of-the-yaml.html"><span class="nav-label">Newer &#8594;</span><span class="nav-title">The peculiarities of the YAML</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Пора отпустить ветку develop &#8594; Владимир Киселев</title>
+  <meta name="description" content="Почему общая ветка develop теряет смысл, когда релиз контролируешь не ты.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Пора отпустить ветку develop">
+  <meta property="og:description" content="Почему общая ветка develop теряет смысл, когда релиз контролируешь не ты.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Пора отпустить ветку develop">
+  <meta name="twitter:description" content="Почему общая ветка develop теряет смысл, когда релиз контролируешь не ты.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Пора отпустить ветку develop",
+    "datePublished": "2019-02-12",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "isBasedOn": "https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-02-12">12 февраля 2019</time></p>
+      <h1 class="post-title">Пора отпустить ветку develop<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../../images/blog/vE42P3i3w5oXnz5u7ezIBA.png" /></figure><p>Пора отпустить ветку develop, если вы не тот человек, который ведёт всю разработку.</p><p>Всю целиком.</p><p>Это ситуация, которую часто видишь в корпоративной, энтерпрайз, если хотите, scrum-подобной среде. Не вы контролируете релиз в смысле того, что в него попадает, и именно здесь вся концепция ветки разработки как будущей версии <em>не имеет никакого смысла</em>.</p><p>Представим типичное scrum-веб-приложение, которое вы делаете/поддерживаете вместе с командой в [Название компании]. Ваши задачи в Jira, вы используете GitHub for Enterprise и следуете стратегии GitFlow (которая прекрасна). И вы мёржите в Develop.</p><h4>Определение проблемы</h4><ul><li>Не обязательно всё, что вы делаете за спринт, попадёт в релиз</li><li>Не обязательно всё, что вы делаете, вообще предназначено для релиза в этой итерации</li><li>Вы и ваши коллеги всё равно захотите вмёржить свой код, даже если он запланирован на следующую итерацию</li></ul><h4>И вот к чему это приводит</h4><ul><li>В итоге в день релиза вам приходится вручную выбирать релиз и вручную применять патчи, создавая версию кода, которую на самом деле никогда не тестировали разработчики, вводившие новые фичи. Это совершенно новая, невиданная вселенная.</li><li>Худшее: вам, возможно, придётся что-то удалять, тем самым не только создавая непредсказуемую вселенную, но и делая возможным, что вы что-то забудете по пути. Это что-то всплывёт в продакшене на следующий день. Такой исход обычно случается ночью.</li><li>Само существование ветки Develop работает как точка путаницы: оно позволяет не думать о целевом релизе фичи, над которой работаешь. Оно позволяет не разговаривать с бизнесом, на который работаешь (да, иногда неясно, какой релиз целевой для фичи).</li></ul><h3>Как это исправить</h3><p><em>Удалите ветку develop</em>. Отпустите её.</p><p>Это всего лишь концепция будущего релиза, за которую вам не стоит платить.</p><p>Держите только релизные ветки. Направляйте свои pull request в релизные ветки. Свободно мёржите старый релиз в новый, когда это удобно вам и команде. Сделайте правилом: новая версия задеплоена &mdash; мёржим код в следующую релизную ветку. Когда неясно, какой релиз целевой: спросите стейкхолдеров. Откатывайте код фичи, как только её целевой релиз изменился (если фиче ещё рано выходить): убедитесь, что стейкхолдеры понимают цену rebase фичи.</p><p>Начните снова думать. Держите релизные ветки вечно. Используйте теги, чтобы отслеживать релизы. Держите мелкие изменения в релизных ветках. Отпустите ветку <strong>develop </strong>(и убедитесь, что вместе с ней уходит и ветка <strong>master</strong>).</p><p>У вас нет концепции ветки <strong>develop </strong>по умолчанию? Вы вправе вообще её не иметь.</p><p><em>Вы, наверное, можете задуматься о feature flags, но я бы предложил подумать дважды, поскольку это никогда не выходит дёшево. Каждое состояние фичи &mdash; это снова та же непротестированная вселенная.</em></p>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9" rel="nofollow">https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <a class="prev" href="19-05-2018-how-to-downgrade-the-npm-version.html"><span class="nav-label">&#8592; Раньше</span><span class="nav-title">Как откатить версию NPM (менеджера пакетов node)</span></a>
+  <a class="next" href="02-06-2019-funny-approaches-to-the-computer-security.html"><span class="nav-label">Позже &#8594;</span><span class="nav-title">Забавные подходы к компьютерной безопасности</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

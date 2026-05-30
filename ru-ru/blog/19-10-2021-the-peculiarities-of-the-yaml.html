@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Особенности YAML &#8594; Владимир Киселев</title>
+  <meta name="description" content="Продолжение заметки о JSON: имя, история, Марс и множество способов сказать да и нет.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Особенности YAML">
+  <meta property="og:description" content="Продолжение заметки о JSON: имя, история, Марс и множество способов сказать да и нет.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Особенности YAML">
+  <meta name="twitter:description" content="Продолжение заметки о JSON: имя, история, Марс и множество способов сказать да и нет.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Особенности YAML",
+    "datePublished": "2021-10-19",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/19-10-2021-the-peculiarities-of-the-yaml.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-10-19">19 октября 2021</time></p>
+      <h1 class="post-title">Особенности YAML<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>Продолжение заметки <a href="01-10-2021-the-peculiarities-of-json.html">«Особенности JSON»</a>, где я делился интересными фактами о JSON.</p><p>Эта &mdash; о YAML, Yet Another Markup Language, который не является языком разметки.</p><figure><img alt="" src="../../images/blog/9lm5bYLsRtuimaUfo_JAyA.jpeg" /></figure><h4>Имя</h4><p>Начавшись как (см. <a href="https://yaml.org/spec/history/2001-08-01.html">https://yaml.org/spec/history/2001-08-01.html</a>) &laquo;Yet Another Markup Language&raquo;, позже он был переименован в &laquo;YAML Ain&rsquo;t Markup Language&raquo;</p><h4>Изобретён</h4><p>Несмотря на то что некоторые энтерпрайз-разработчики (из тех, что мне встречались) до сих пор думают, будто YAML &mdash; новая технология, его история началась ещё в 2004 году, что делает его максимум на 4 года старше официальной даты появления JSON.</p><h4>Миссия на Марс</h4><p>Согласно GitHub, YAML использовался NASA в рамках миссии вертолёта Mars 2020.</p><h4>YAML был почти надмножеством JSON и стал строгим надмножеством (2009, YAML 1.2)</h4><p>Хотя, согласно истории <a href="https://yaml.org/spec/1.2.2/#12-yaml-history">https://yaml.org/spec/1.2.2/#12-yaml-history</a>, поначалу это чистое совпадение.</p><h4>Цели YAML</h4><p>Вы не найдёте &laquo;лёгкости записи&raquo; среди целей YAML, перечисленных в <a href="https://yaml.org/spec/1.2.2/#11-goals">https://yaml.org/spec/1.2.2/#11-goals</a> &mdash; зато читаемость человеком стоит на первом месте. Не знаю почему, но мне это кажется очень забавным.</p><h4>С большой силой приходит большой счёт за электричество</h4><p>YAML мощен, и нужно быть осторожным, ведь в некоторых случаях им могут воспользоваться злые люди <a href="https://tenderlovemaking.com/2013/02/06/yaml-f7u12.html">https://tenderlovemaking.com/2013/02/06/yaml-f7u12.html</a> (и любовь к YAML, и небезопасные парсеры были поставлены под сомнение ещё в 2013 году)</p><h4>Много способов сказать да и нет</h4><p>В YAML есть много способов сказать да и нет &mdash; y|Y|yes|Yes|YES|n|N|no|No|NO<br>|true|True|TRUE|false|False|FALSE<br>|on|On|ON|off|Off|OFF (<a href="https://yaml.org/type/bool.html">https://yaml.org/type/bool.html</a>), и норвежцы знают это лучше кого-либо ещё, ведь <strong>no </strong>&mdash; это ещё и код, часто используемый для обозначения норвежского языка. Множество других интересных примеров перечислено на <a href="https://noyaml.com">https://noyaml.com</a>.</p><h4>Мы всё равно его любим</h4><h3>Ссылки</h3><p><a href="https://yaml.org">https://yaml.org</a> &mdash; официальный сайт YAML</p>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4" rel="nofollow">https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <a class="prev" href="01-10-2021-the-peculiarities-of-json.html"><span class="nav-label">&#8592; Раньше</span><span class="nav-title">Особенности JSON</span></a>
+  <a class="next" href="25-11-2021-on-how-to-measure-the-developer-productivity.html"><span class="nav-label">Позже &#8594;</span><span class="nav-title">Как измерять продуктивность разработчика</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

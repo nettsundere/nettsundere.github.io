@@ -61,6 +61,24 @@ const PAGES = [
     h1: 'Пишите',
     activeNav: 'Контакты',
   },
+  {
+    name: 'writing index (en)',
+    path: '/blog.html',
+    lang: 'en',
+    dataPage: 'blog',
+    titleContains: 'Writing',
+    h1: 'Writing',
+    activeNav: 'Writing',
+  },
+  {
+    name: 'writing index (ru)',
+    path: '/ru-ru/blog.html',
+    lang: 'ru',
+    dataPage: 'blog',
+    titleContains: 'Блог',
+    h1: 'Блог',
+    activeNav: 'Блог',
+  },
 ];
 
 for (const page of PAGES) {

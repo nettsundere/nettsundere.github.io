@@ -183,7 +183,7 @@
   /* One red square — launches from the VK. glyph, weaves to cursor, becomes cursor bg */
   function scrollDot() {
     if (isTouch()) return;
-    const sources = document.querySelectorAll('.display .dot');
+    const sources = document.querySelectorAll('.display .dot, .post-title .dot');
     sources.forEach((s) => { s.style.visibility = 'hidden'; });
 
     const SIZE = 16;
@@ -194,7 +194,7 @@
     dot.style.height = SIZE + 'px';
     document.body.appendChild(dot);
 
-    const source = sources[0];
+    const source = document.querySelector('.display .dot');
     let originX = window.innerWidth * 0.05, originY = 40;
     if (source) {
       const range = document.createRange();

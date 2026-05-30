@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Реализация операций Min и Max для чисел с плавающей точкой &#8594; Владимир Киселев</title>
+  <meta name="description" content="Почему Min/Max ведут себя по-разному в разных языках, когда в дело вступают NaN, &plusmn;0 и &plusmn;Infinity.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Реализация операций Min и Max для чисел с плавающей точкой">
+  <meta property="og:description" content="Почему Min/Max ведут себя по-разному в разных языках, когда в дело вступают NaN, &plusmn;0 и &plusmn;Infinity.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Реализация операций Min и Max для чисел с плавающей точкой">
+  <meta name="twitter:description" content="Почему Min/Max ведут себя по-разному в разных языках, когда в дело вступают NaN, &plusmn;0 и &plusmn;Infinity.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Реализация операций Min и Max для чисел с плавающей точкой",
+    "datePublished": "2015-11-25",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-11-25">25 ноября 2015</time></p>
+      <h1 class="post-title">Реализация операций Min и Max для чисел с плавающей точкой<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>Рассказ о различиях в программных реализациях простых математических операций, отвечающих на вопрос: &laquo;Какое из двух значений с плавающей точкой больше&raquo; (или меньше).</p><p>Связанные с float реализации Min и Max различаются, и в большинстве случаев их поведение не соответствует<br>стандарту IEEE-754&ndash;2008 (IEEE Standard for Binary Floating-Point Arithmetic).</p><p>Рассмотрим <em>следующий пример </em>наивной обобщённой реализации Max на JavaScript:</p><pre>function Max(a, b) {<br>  if(a &gt; b) {<br>    return a; <br>  } else {<br>    return b; <br>  }<br>}</pre><p>Эта реализация некорректна во многих отношениях:</p><ul><li>Она не обрабатывает случаи -0 +0 (+0 должен быть больше -0);</li><li>Она не обрабатывает аргументы и их количество согласно спецификации JavaScript (случаи -Infinity / +Infinity)</li></ul><p>И самое интересное:</p><ul><li>Она не умеет правильно обрабатывать значение NaN (Not-a-Number)</li></ul><figure><img alt="" src="../../images/blog/7H4rs6k6g8M_5P_gxGZtPg.png" /><figcaption>Мой любимый источник NaN: деление нуля на ноль</figcaption></figure><p>Но как же правильно обработать ситуацию с NaN, когда a равно NaN, или b равно NaN, или и a, и b равны NaN. Как только мы используем числа с плавающей точкой, мы можем найти цитаты из стандарта <strong>IEEE</strong>, а затем найдём определения операций minNum и maxNum,<br><em>которые предпочитают числа </em>значениям NaN, так что <strong>Max(NaN, число) = Max(число, NaN) = число</strong>.</p><p>Но <strong>не так уж много</strong> современных IEEE-совместимых реализаций.</p><h4>Библиотеки с обработкой NaN, совместимой с IEEE 754&ndash;2008,</h4><p><em>где Max(NaN, число) = Max(число, NaN) = число:</em><br>язык C, начиная с C99 <a href="http://en.cppreference.com/w/c/numeric/math/fmax">http://en.cppreference.com/w/c/numeric/math/fmax</a></p><h4>Библиотеки с обработкой NaN, несовместимой с IEEE 754&ndash;2008,</h4><p><em>где Max(NaN, число) = Max(число, NaN) = NaN:</em></p><ul><li>ECMAScript,<br>спецификация <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11">http://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11</a> и реализация V8 <a href="https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77">https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77</a></li><li>.NET (C#, F# и другие, использующие модуль Math, оператор max для F#)<br><a href="https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381">https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381</a></li></ul><h4>Примеры библиотек, бросающих исключения при аргументах-NaN:</h4><ul><li>Ruby (есть методы max/min, определённые на Enumerable, стандартных реализаций Max/Min нет),<br>бросит &laquo;comparison of Float with NaN failed&raquo;. Но класс NaN всё ещё float. Более старые версии интерпретатора ruby могут бросить исключение &laquo;comparison of Float with Float failed&raquo;.</li></ul><h4>Некоммутативное поведение</h4><p><em>где Max(число, NaN) не равно Max(NaN, число)</em></p><p>Swift, Haskell, OCaml</p><p>Обходные пути существуют.</p><h4>Заключение</h4><p>Похоже, что большую часть времени нам следует гарантировать, что все аргументы функций Min/Max не являются NaN, потому что результаты могут быть испорчены другим аргументом в зависимости от реализации Min/Max.<br>Стандарт IEEE определяет эталонное поведение, но чаще всего в современных языках вы увидите другое.<br>Почему?</p><ul><li>Похоже, потому что нет другого способа получить источник ошибки в результате, кроме исключения. А исключения считаются медленными;</li><li>Инженеры делают стандартные библиотеки, глядя на реализации других стандартных библиотек;</li><li>Сам pdf со стандартом недоступен бесплатно.</li><li>Обобщённая реализация &laquo;одна на всех&raquo; выглядит привлекательно.</li><li>Это краевой случай, который большую часть времени не важен для разработчиков. Нам остаётся просто сидеть и ждать, пока проблема не ударит.</li></ul><p>p.s. Есть ещё краевой случай (&plusmn; Infinity, NaN).</p><p>Хотя записи стандарта об операциях с float доступны, лучше сначала прочитать спецификацию языка [ваш_любимый_язык_программирования].</p><figure><img alt="" src="../../images/blog/gm67zRlM5TC6p53Tofy-ZQ.png" /></figure>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d" rel="nofollow">https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <a class="prev" href="08-06-2015-on-reducing-changelog-merge-conflicts.html"><span class="nav-label">&#8592; Раньше</span><span class="nav-title">О сокращении конфликтов слияния в&nbsp;&laquo;Changelog&raquo;</span></a>
+  <a class="next" href="11-04-2017-a-text-is-not-that-important.html"><span class="nav-label">Позже &#8594;</span><span class="nav-title">Текст не так уж и важен</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

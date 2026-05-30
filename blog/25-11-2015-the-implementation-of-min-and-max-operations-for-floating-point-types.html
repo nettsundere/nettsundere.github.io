@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The implementation of Min and Max operations for floating-point types &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="Why Min/Max differ across languages once NaN, &plusmn;0 and &plusmn;Infinity enter the picture.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="The implementation of Min and Max operations for floating-point types">
+  <meta property="og:description" content="Why Min/Max differ across languages once NaN, &plusmn;0 and &plusmn;Infinity enter the picture.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The implementation of Min and Max operations for floating-point types">
+  <meta name="twitter:description" content="Why Min/Max differ across languages once NaN, &plusmn;0 and &plusmn;Infinity enter the picture.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "The implementation of Min and Max operations for floating-point types",
+    "datePublished": "2015-11-25",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-11-25">25 November 2015</time></p>
+      <h1 class="post-title">The implementation of Min and Max operations for floating-point types<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>Story about differences in software implementations of simple mathematical operations answering the question: “Which of two floating-point values are greater” (or lower).</p><p>The float-related implementations of Min and Max are different and in most cases their behavior is not conforming to<br>IEEE-754–2008 standard (IEEE Standard for Binary Floating-Point Arithmetic).</p><p>Consider the <em>following example </em>of naïve generic Max JavaScript implementation:</p><pre>function Max(a, b) {<br>  if(a &gt; b) {<br>    return a; <br>  } else {<br>    return b; <br>  }<br>}</pre><p>This implementation isn’t correct in many ways:</p><ul><li>It cannot handle -0 +0 cases (+0 should be greater than -0);</li><li>It doesn’t handles input and number of arguments according to JavaScript specification (-Infinity / +Infinity cases)</li></ul><p>And most interesting:</p><ul><li>It cannot handle NaN value correctly (Not-a-Number)</li></ul><figure><img alt="" src="../images/blog/7H4rs6k6g8M_5P_gxGZtPg.png" /><figcaption>My favorite NaN source: zero by zero division</figcaption></figure><p>But what is the correct way of handling NaN situation, when a is NaN or b is NaN, or both a and b is NaN. As soon as wee use floating-point numbers we can find citations of <strong>IEEE </strong>standard and then we will find definitions of minNum and maxNum operations,<br><em>which prefer numbers </em>over NaN values, so <strong>Max(NaN, number) = Max(number, NaN) = number</strong>.</p><p>But there are <strong>not so many</strong> modern IEEE-compatible implementations.</p><h4>IEEE 754–2008 compatible NaN handling libraries,</h4><p><em>where Max(NaN, number) = Max(number, NaN) = number:</em><br>C language, since C99 <a href="http://en.cppreference.com/w/c/numeric/math/fmax">http://en.cppreference.com/w/c/numeric/math/fmax</a></p><h4>IEEE 754–2008 incompatible NaN handling libraries,</h4><p><em>where Max(NaN, number) = Max(number, NaN) = NaN:</em></p><ul><li>ECMAScript,<br>specification <a href="http://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11">http://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11</a> and V8 implementation <a href="https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77">https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77</a></li><li>.NET (C#, F# and others using Math module, max operator for F#)<br><a href="https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381">https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381</a></li></ul><h4>Examples of libraries throwing exceptions in case of NaN arguments:</h4><ul><li>Ruby (there are max/min methods defined on Enumerable, no standard Max/Min implementations),<br>will throw “comparison of Float with NaN failed”. But NaN class is still float. Older version of ruby interpreter can throw “comparison of Float with Float failed” exception.</li></ul><h4>Non-commutative behavior</h4><p><em>where Max(number, NaN) isn’t equal to Max(NaN, number)</em></p><p>Swift, Haskell, OCaml</p><p>Workarounds available.</p><h4>Conclusion</h4><p>It seems that most of the time we should ensure that all of arguments of Min/Max functions are not NaNs, because results can be spoiled by other argument depending on Min/Max implementation.<br>IEEE standard defines standard behavior, but most of the time in modern languages you will see another behavior.<br>Why?</p><ul><li>It seems that is because there are no other way of getting error source in result, except exception. And exceptions are considered slow;</li><li>Engineers are making standard libraries by looking at other standard libraries implementations;</li><li>Standard pdf itself isn’t available for free.</li><li>Generic one-for-all implementation looks attractive.</li><li>This is a corner case which is not important most of the time for developers. We should just sit and wait until the problem strikes.</li></ul><p>p.s. There is also (± Infinity, NaN) corner case.</p><p>Although Standard entries about float operations are available, it’s better for you to read [your_favorite_programming_language] language specification first.</p><figure><img alt="" src="../images/blog/gm67zRlM5TC6p53Tofy-ZQ.png" /></figure>
+<p class="medium-note">Originally posted on Medium: <a href="https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d" rel="nofollow">https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <a class="prev" href="08-06-2015-on-reducing-changelog-merge-conflicts.html"><span class="nav-label">&#8592; Older</span><span class="nav-title">On reducing &ldquo;Changelog&rdquo; merge conflicts</span></a>
+  <a class="next" href="11-04-2017-a-text-is-not-that-important.html"><span class="nav-label">Newer &#8594;</span><span class="nav-title">A text is not that important</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+</body>
+</html>

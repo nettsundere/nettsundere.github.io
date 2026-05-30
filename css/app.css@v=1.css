@@ -192,8 +192,8 @@
     bottom: 0;
     height: 1px;
     background: currentColor;
-    transform: scaleX(0);
-    transform-origin: right;
+    transform: scaleX(1);
+    transform-origin: left;
     transition: transform 0.3s cubic-bezier(.6,.1,.2,1);
   }
   .site-header nav a:hover::after { transform: scaleX(1); transform-origin: left; }
@@ -235,7 +235,7 @@
   }
   .hero .headline { grid-column: 2 / span 8; }
   .hero .headline .display { margin-inline-start: -0.05em; }
-  .hero .headline .display .dot { color: var(--c-red); }
+  .hero .headline .display .dot { color: var(--c-red); display: inline-block; transform: translateY(0.06em); }
   .hero .headline .sub {
     margin-top: var(--s-5);
     font-size: var(--fs-h3);
@@ -286,7 +286,7 @@
     padding-block: var(--s-5);
     border-top: 1px solid var(--c-ink);
   }
-  .resume-row:last-of-type { border-bottom: 1px solid var(--c-ink); }
+  .hero + .grid .resume-row { border-top: 0; }
   .resume-row > .resume-label {
     grid-column: 1 / span 3;
     align-self: start;
@@ -321,7 +321,7 @@
   .timeline-item .note { color: var(--c-muted); margin-top: var(--s-2); font-size: 0.95rem; }
 
   /* Contact list (big stacked) */
-  .contact-list { grid-column: 1 / span 10; border-top: 1px solid var(--c-ink); }
+  .contact-list { grid-column: 1 / span 10; }
   .contact-item {
     display: grid;
     grid-template-columns: minmax(10ch, 14ch) 1fr auto;
@@ -330,6 +330,7 @@
     padding-block: var(--s-5);
     border-bottom: 1px solid var(--c-ink);
   }
+  .contact-item:last-child { border-bottom: 0; }
   .contact-item .label { align-self: baseline; }
   .contact-item a {
     font-size: var(--fs-h1);
@@ -360,6 +361,11 @@
   .red { color: var(--c-red); }
   .nowrap { white-space: nowrap; }
   a.magnetic { display: inline-block; will-change: transform; }
+
+  /* Text-based links carry an underline at all times */
+  main a { text-decoration: underline; text-underline-offset: 0.14em; }
+  .site-header .lang a { text-decoration: underline; text-underline-offset: 0.14em; }
+  .timeline-item .org a { border-bottom: 0; }
 }
 
 @layer motion {

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Как измерять продуктивность разработчика &#8594; Владимир Киселев</title>
+  <meta name="description" content="Продуктивность как свойство несовершенной модели &mdash; измеряйте команды, а не одиночек.">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Владимир Киселев">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Владимир Киселев">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:title" content="Как измерять продуктивность разработчика">
+  <meta property="og:description" content="Продуктивность как свойство несовершенной модели &mdash; измеряйте команды, а не одиночек.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Как измерять продуктивность разработчика">
+  <meta name="twitter:description" content="Продуктивность как свойство несовершенной модели &mdash; измеряйте команды, а не одиночек.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Как измерять продуктивность разработчика",
+    "datePublished": "2021-11-25",
+    "inLanguage": "ru",
+    "url": "https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html",
+    "isBasedOn": "https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Владимир Киселев" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="ru">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Программист &#8942; архитектор ПО</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Главная</a>
+    <a href="../rezyume.html" class="magnetic">Резюме</a>
+    <a href="../kontakty.html" class="magnetic">Контакты</a>
+    <a href="../blog.html" class="magnetic is-active">Блог</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">EN</a><span class="sep">/</span><span class="is-active">RU</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Владимир Киселев &#8942; Блог</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-11-25">25 ноября 2021</time></p>
+      <h1 class="post-title">Как измерять продуктивность разработчика<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../../images/blog/F0Mq9sOj9FUVMvDqopaOGA.jpeg" /></figure><p>На днях я слушал подкаст Microsoft Research (New Future of Work: How developer collaboration and productivity are changing in a hybrid work model &mdash; <a href="https://www.microsoft.com/en-us/research/podcast/new-future-of-work-how-developer-collaboration-and-productivity-are-changing-in-a-hybrid-work-model/">https://www.microsoft.com/en-us/research/podcast/new-future-of-work-how-developer-collaboration-and-productivity-are-changing-in-a-hybrid-work-model/</a>)</p><p><strong>Примечание &mdash; </strong>Кстати, это очень интересный подкаст сам по себе, мой комментарий на 100% опционален и основан лишь на наблюдениях</p><p>Одна из затронутых там тем &mdash; продуктивность разработчиков, и я хотел сосредоточиться на ней, просто чтобы поделиться мыслями.</p><h3>Модель</h3><p>Метрику проще оценивать, если думать о ней как о свойстве несовершенной модели. Значение в измерении, представляющем одно из качеств.</p><p>Разберём пример модели и её свойства.</p><p><em>Самолёт отрывается от земли. Нужно объяснить почему.</em></p><ul><li>Физик, вероятно, построит модель, объясняющую взлёт через законы Ньютона, принцип Бернулли, аэродинамический профиль (форму крыла, помогающую поднять самолёт) и т. д.</li><li>Экономист, вероятно, просто скажет, что это потому, что есть смысл переместить самолёт из A в B, может быть, измеряя это деньгами: цена выхода или потенциального выхода с учётом рисков больше, чем вход. Буквально, люди купили билеты, так что самолёт полетит (я часто использую это как шутку, чтобы объяснить разницу между моделями).</li><li>Инженер космической эры мог бы сказать, что даже старый бабушкин комод хорошо полетит, если есть нужный двигатель и возможность менять вектор приложенной силы.</li><li>Объяснение на основе химии, вероятно, сосредоточится на топливе и тоже на физике</li></ul><p>Все эти объяснения хороши, мне кажется; они просто используют разные модели, которые могут помочь тем, кто ими пользуется, узнать что-то, что стоит починить. Но опасно чинить что-то, исходя только из односторонней точки зрения, особенно если у самой модели всего несколько измеримых свойств. Чем проще модель, чем меньше набор свойств для измерения, тем труднее быть уверенным, что изменение моделируемой вещи не приведёт к катастрофе. Хороший пример &mdash; попытка починить физическую проблему кодом, игнорируя решения на основе физики, или решение настроить компьютеры разработчиков, исходя только из финансовой модели. Должна быть обратная связь, модель более низкого уровня или хотя бы обратная связь от людей.</p><p>Также, когда модели не хватает большого набора свойств для измерения, есть риск выстроить структуру, которая будет стараться давать хорошие измерения вместо реального результата (строки кода, исправленные баги, завершённые pull request &mdash; если фокусироваться только на них &mdash; теоретическое измеряемое сообщество, вероятно, адаптируется, создавая больше строк, багов для исправления и ненужных изменений ради кубка эффективности).</p><h3>Контекст</h3><p>Простая математика говорит: <em>2 * 5 = 5 * 2</em>, но для человека это может быть совсем по-разному в зависимости от контекста, например при покупке продуктов, когда у вас есть выбор: сходить к машине 5 раз, неся по 2 пакета, или 2 раза, неся по 5 пакетов, и т. д.</p><p>Даже если вы моделируете отдельного водителя машины, даже если он окажется очень талантливым экземпляром, контекст всё равно легко может снизить его качество (пример: хороший водитель может буксовать там, где все водят не очень хорошо).</p><p>В смысле, хорошая ли идея измерять вне контекста? Не думаю. Метрика количества pull request &mdash; не очень хорошая вещь, когда измеряется в одиночку и выражается числом. Граф pull request, где один порождает другой, может быть лучше (одно изменение может позволить сделать множество других), но всё же &mdash; справедливо ли говорить, что только разработчик решает, делать ли большие, значимые изменения? В отношении продуктивности разработчиков контекст &mdash; это команда, запросы &mdash; результат команды, так что трудно сказать, что работу разработчиков легко выразить числом.</p><h3>Вход и результат</h3><p>Результат (продукт, ПО, свойства и т. д.) не должен быть единственным, что измеряется, я думаю. Похоже, необходимо думать и о входе, и измерять его тоже.</p><p>Пример: были времена в прошлом, когда у меня одновременно шло 5+ разговоров в Teams. В какой-то момент я думал предложить фичу приложения, которая позволит разработчикам легче управлять очередью, в том числе дать менеджеру решать, какой приоритет лучший. Думаю, человеку очень трудно фокусироваться на слишком многих вещах одновременно из-за слабости нашей кратковременной рабочей памяти (шимпанзе, кстати, в этом лучше).</p><p class="post-embed"><a href="https://www.youtube.com/watch?v=zsXP8qeFF6A">Смотреть на YouTube &#8599;</a></p><p>Удалённая эпоха усложнила людям возможность видеть, сколько у вас сейчас разговоров, и думаю, это можно исправить, просто позволив другим видеть, насколько велика ваша очередь решений. Это хорошее измерение, но, может быть, не для навыков разработчиков &mdash; возможно, для изучения коммуникационного графа, чтобы упрощать процессы в целом (например, направленные ациклические коммуникации могут быть быстрее, без &laquo;туда-сюда&raquo;).</p><h3>В целом</h3><p>Думаю, имеет смысл моделировать/измерять вместо этого команды и то, что они поставляют (выход), на основе входа и контекста, и одно это потенциально может помочь организациям получить достаточно обратной связи, чтобы улучшаться. Продуктивность разработчиков можно измерять через их команды.</p><p>Если кому-то нужно вывести число, которое будет коррелировать с продуктивностью отдельного разработчика, он может в итоге получить число, которое ничего не значит, что-то вроде абстрактного индекса производительности компьютера. Ок, индекс 10, но настоящий вопрос &mdash; смогу ли я запустить новый улучшенный Skyrim или нет.</p><p>Так что для меня ответ таков: просто поговорите с членами команды, если хотите больше узнать об их продуктивности и помочь им быть продуктивными, но не используйте эти данные вне контекста их команды. Добрый старый 1&ndash;1 может помочь сильно, пожалуй, больше, чем автоматизация на основе выхода.</p>
+<p class="medium-note">Изначально опубликовано на Medium: <a href="https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a" rel="nofollow">https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Навигация по записям">
+  <a class="prev" href="19-10-2021-the-peculiarities-of-the-yaml.html"><span class="nav-label">&#8592; Раньше</span><span class="nav-title">Особенности YAML</span></a>
+  <span></span>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; Весь блог</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Владимир Киселев</span>
+  <span class="label right">Санкт-Петербург &middot; RU</span>
+</footer>
+
+<script src="../../js/app.js@v=1.js" defer></script>
+</body>
+</html>

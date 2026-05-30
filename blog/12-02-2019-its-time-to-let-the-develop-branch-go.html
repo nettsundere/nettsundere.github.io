@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>It&rsquo;s time to let the develop branch go &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="Why a shared develop branch stops making sense when you don&rsquo;t control the release.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="It&rsquo;s time to let the develop branch go">
+  <meta property="og:description" content="Why a shared develop branch stops making sense when you don&rsquo;t control the release.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="It&rsquo;s time to let the develop branch go">
+  <meta name="twitter:description" content="Why a shared develop branch stops making sense when you don&rsquo;t control the release.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "It’s time to let the develop branch go",
+    "datePublished": "2019-02-12",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "isBasedOn": "https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-02-12">12 February 2019</time></p>
+      <h1 class="post-title">It&rsquo;s time to let the develop branch go<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../images/blog/vE42P3i3w5oXnz5u7ezIBA.png" /></figure><p>It’s time to let the develop branch go if you are not the person who does all the development.</p><p>All of it.</p><p>That’s a situation one often sees in a corporate, enterprise if you wish, scrum-ish like environment. It’s not you who control the release in terms of what goes in, and that is the spot where the whole concept of the development branch in a form of a future version makes <em>no sense at all</em>.</p><p>Let’s imagine a typical scrum-based web-application you are making/supporting with your fellow team at [Name of the company]. Your tasks are organized in Jira, you use Github for Enterprise and you are following the GitFlow strategy (which is beautiful). And you merge in Develop.</p><h4>The definition of the problem</h4><ul><li>It’s not necessary that everything you do during the sprint will get to the release</li><li>It’s not necessary that everything you do is ever meant to be released in this iteration</li><li>You and your teammates will still want to get their code merged, even if their code is planned for the next iteration</li></ul><h4>And that’s what it causes</h4><ul><li>Eventually you must manually pick the release and apply patches manually when the Release day happens, thus creating the version of code which was in fact never tested by developers who were introducing new features. It’s a whole new unseen universe.</li><li>The worst thing: you may have to delete something, thus not only creating the unpredictable universe, but also making it possible that you will forget something along the way. This something will surface in production the day after. This outcome often tends to happen at night.</li><li>The very existence of the Develop branch acts as a confuse point: it lets you to skip the thinking about target release of the feature you are working on. It lets you to skip talking to the business you are working for (yes, sometimes it’s uncertain what is a target release for a feature).</li></ul><h3>How you can fix it</h3><p><em>Delete the develop branch</em>. Let it go.</p><p>It’s just a concept of a future release which you shouldn’t be paying for.</p><p>Keep only release branches. Target your pull requests to release branches. Feel free to merge older release to the newer release when it’s comfortable for you and your team. Make it a rule: new version is deployed, merge the code to the next release branch. When it’s uncertain what target release is: ask the stakeholders. Revert the code of a feature as soon as its target release has changed (if it’s too soon for a feature to go): make sure the stakeholders understand the price of rebasing a feature.</p><p>Start thinking again. Keep release branches forever. Use tags to keep track of your releases. Keep minor changes in your release branches. Let the <strong>develop </strong>branch go (make sure that the <strong>master </strong>branch goes with it).</p><p>There is no concept of a default <strong>develop </strong>branch for you? You are free to not have it whatsoever.</p><p><em>You could probably start thinking about feature flags, but i would suggest to think twice, as it never comes out to be cheap. Each feature state is the same untested universe again.</em></p>
+<p class="medium-note">Originally posted on Medium: <a href="https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9" rel="nofollow">https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <a class="prev" href="19-05-2018-how-to-downgrade-the-npm-version.html"><span class="nav-label">&#8592; Older</span><span class="nav-title">How to downgrade the NPM (node package manager) version</span></a>
+  <a class="next" href="02-06-2019-funny-approaches-to-the-computer-security.html"><span class="nav-label">Newer &#8594;</span><span class="nav-title">Funny approaches to the computer security</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+</body>
+</html>
