@@ -134,6 +134,10 @@
   color: var(--c-muted);
 }
 .post-body .post-embed { margin-top: var(--s-4); }
+.post-body .post-related {
+  margin-top: var(--s-4);
+  color: var(--c-muted);
+}
 
 /* Medium attribution */
 .medium-note {

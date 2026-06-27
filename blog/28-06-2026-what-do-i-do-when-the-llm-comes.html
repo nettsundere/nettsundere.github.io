@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What do I do when the LLM comes &#8594; Vladimir Kiselev</title>
+  <meta name="description" content="Two answers: I am an LLM myself, and a longer one about universal libraries, G&ouml;del, and why you need a system of thinking.">
+  <link rel="icon" type="image/png" href="../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="Vladimir Kiselev">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Vladimir Kiselev">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="What do I do when the LLM comes">
+  <meta property="og:description" content="Two answers: I am an LLM myself, and a longer one about universal libraries, G&ouml;del, and why you need a system of thinking.">
+  <meta property="og:url" content="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What do I do when the LLM comes">
+  <meta name="twitter:description" content="Two answers: I am an LLM myself, and a longer one about universal libraries, G&ouml;del, and why you need a system of thinking.">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "What do I do when the LLM comes",
+    "datePublished": "2026-06-28",
+    "inLanguage": "en",
+    "url": "https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "Vladimir Kiselev" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../css/app.css@v=1.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="en">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">Software engineer &#8942; architect</a>
+  <nav aria-label="Primary">
+    <a href="../index.html" class="magnetic">Index</a>
+    <a href="../resume.html" class="magnetic">R&eacute;sum&eacute;</a>
+    <a href="../contact.html" class="magnetic">Contact</a>
+    <a href="../blog.html" class="magnetic is-active">Writing</a>
+  </nav>
+  <div class="lang">
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">RU</a>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Writing</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2026-06-28">28 June 2026</time></p>
+      <h1 class="post-title">What do I do when the LLM comes<span class="dot">.</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>I have two answers to this question: one short, and one a bit harder. Let me start with the short one.</p><h3>I am an LLM</h3><p>Literally. If you think of me as a machine that turns your requests into code, then in some sense I am very much like an LLM &mdash; depending on your model, all the way up to being identical. I&rsquo;ve built a lot of systems, been through a great many trenches and foxholes. In some places I managed to make users&rsquo; lives better, in others I didn&rsquo;t. Some battles I won, some I lost. That is my context, my unique experience that others don&rsquo;t have.</p><p>I have an interface: I understand natural language &mdash; several of them, to be precise &mdash; and with each language a part of its culture entered me. This mix is unique, but the interface itself is not. Can I answer requests in the Anthropic or OpenAI format? Of course I can. Can I answer just as fast? Sometimes I can be faster, but my human capabilities, as you understand, are limited.</p><p>Other language models are limited in exactly the same way. They differ from me only in implementation details.</p><p>Now the second version of the answer, a bit more detailed.</p><h3>Chapter one. The universal library</h3><p>Kurd Lasswitz, in his story &ldquo;Die Universalbibliothek&rdquo; (early 1900s, <a href="https://mithilareview.com/lasswitz_09_17/">https://mithilareview.com/lasswitz_09_17/</a>), is one of the first to introduce the concept of a library that holds all possible knowledge: both what already exists and what will only come to exist (those books have not been written by anyone yet &mdash; but they already stand on the shelves).</p><p>Later Jorge Luis Borges, inspired by this work, publishes &ldquo;The Library of Babel&rdquo;. In essence he unfolds the same construction, but through the lens of the people living inside it. And there is one wonderful quote in it:</p><blockquote>One book, which my father once saw in a hexagon in circuit 15-94, consisted of the letters MCV perversely repeated from the first line to the last. Another (much consulted in this zone) is a mere labyrinth of letters whose penultimate page contains the phrase O Time thy pyramids.</blockquote><p>Science-fiction writers later came back to similar ideas many times, and each time it was an attempt to imagine the grand, inhuman scale of such a library &mdash; and, at the same time, its deep inner problem.</p><h3>Chapter two. The total library and G&ouml;del&rsquo;s incompleteness theorem</h3><p>The previous library had everything &mdash; truth and falsehood, order and chaos. It has no criterion that separates truth from noise. Let&rsquo;s imagine a library without flaws: it holds all true knowledge, there are no contradictions, every statement is provable by its own means. Sounds like an ideal. But there is one problem &mdash; it has to be provable.</p><p>If it is consistent, it cannot contain statements that contradict each other (otherwise &mdash; a logical explosion). It cannot contain books that can&rsquo;t be proven by the library&rsquo;s own means. It cannot contain falsehood.</p><p>But we put on the shelf the book &ldquo;This book cannot be proven by the library&rsquo;s own means&rdquo; &mdash; and the library hits a dead end. If it proves the book, the book is false, and the library has proven a falsehood &mdash; it is no longer consistent. If it cannot, then the book is true, yet it stands on a shelf the library can never reach on its own &mdash; so the library is incomplete. Either way, such a total library cannot be built. The one who knows the answer is always outside it &mdash; in the corridor.</p><p>That is exactly what G&ouml;del proved: a consistent system cannot be complete.</p><p>So it turns out that:</p><p>a) a complete, consistent library simply cannot exist,<br>b) in the corridor at the entrance to this imperfect library there must be an observer &mdash; a human or a machine &mdash; who compensates for its imperfection at one level or another.</p><p>Mathematics came up with a tool for partial compensation &mdash; transfinite induction. It lets you prove the termination of some programs, but not all of them. It is an algorithm of proof, not an algorithm of navigation through the Universal library.</p><h3>Chapter three. On the ability to explain</h3><p>So, we know how to walk the library, we know how to prove, we understand that it is not perfect. But we cannot just jump straight to the book we need. Even if we imagine that somewhere in this infinite library there exists a guidebook, its size would be comparable to the size of the library itself.</p><p>In exactly the same way, we cannot get from &ldquo;artificial intelligence&rdquo; that one exhaustive book &mdash; not because it can&rsquo;t yet, but because such a book is impossible as a physical object. Properly speaking, it would have to contain the whole Universe. You could probably say that we live on its pages &mdash; and cannot step off them.</p><p>For me, the first winter of artificial intelligence ended with exactly this realization. I understood that I was able to build a neural network: take someone else&rsquo;s architecture or invent my own, train it and get an acceptable result. But I am not able to explain the laws by which it works once it has been run thousands of times.</p><p>The same is true today with LLMs: we are not able to explain how they work in the general case. You can set a system prompt, you can tweak the weights, but these are not laws, just approximations. And when closed LLMs are used, another layer is added: we run into someone else&rsquo;s ideology, which for now disguises itself as limitations, but conscious sabotage is not far off.</p><p>That is why we need a philosophy &mdash; some system of thinking that will protect us from the harmful effects of using LLMs and the systems that follow. Without it &mdash; no way. This system of thinking is exactly the result of the observer&rsquo;s work in the corridor of the library.</p><p>Examples of such systems of thinking:</p><ul><li>Transfinite induction</li><li>REST</li><li>TRIZ</li><li>ARIZ</li><li>Nielsen&rsquo;s heuristics</li><li>Agile methodologies</li></ul><p>A system of thinking can be fairly simple, primitive, in places even wrong and imperfect. But that is precisely the key factor for reaching a concrete, verifiable result.</p><h3>What do I do when the LLM comes?</h3><p>Give importance to the system of thinking you don&rsquo;t have yet &mdash; formulate it, and become aware of how limited it is. Whether your brain is used or its alternative &mdash; there is, by and large, no difference. The size of a particular LLM&rsquo;s &ldquo;library&rdquo; is rather limited compared to cosmic scales, literally physically inaccessible to the model.</p><p>To move to another floor, one that is still closed, the observer has to take a step forward. Create a new LLM or open the door yourself &mdash; again, no difference.</p><p>Taxi-hailing services have already taken freedom away from many (you can only go where your service operates). LLM operators will try in exactly the same way to take away your freedom to open the door yourself.</p><p>I believe one should:</p><ul><li>Build your own system of thinking, remove guesswork from engineering decisions, be aware of the system&rsquo;s limits, and be ready to revise them</li><li>Apply LLMs locally and invest in local-run technologies, in whatever lets you keep control of the system of thinking.</li></ul><p>That is exactly what will let you, as engineers, not become a mere layer between input and output. But don&rsquo;t expect that from other LLMs.</p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="Post navigation">
+  <a class="prev" href="25-11-2021-on-how-to-measure-the-developer-productivity.html"><span class="nav-label">&#8592; Older</span><span class="nav-title">On how to measure the developer productivity</span></a>
+  <span></span>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="magnetic back-link">&#8592; All writing</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">&copy; 2026 Vladimir Kiselev</span>
+  <span class="label right">Saint Petersburg &middot; RU</span>
+</footer>
+
+<script src="../js/app.js@v=1.js" defer></script>
+<script src="../js/transitions.js@v=1.js" defer></script>
+</body>
+</html>
