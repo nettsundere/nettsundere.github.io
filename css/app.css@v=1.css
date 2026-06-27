@@ -13,7 +13,7 @@
 @layer tokens {
   :root {
     --c-ink: #0a0a0a;
-    --c-paper: #f4f1ea;
+    --c-paper: #ddd;
     --c-paper-alt: #ffffff;
     --c-red: #e3000f;
     --c-muted: #5a5a5a;
@@ -117,18 +117,6 @@
 }
 
 @layer components {
-  /* Canvas background */
-  #bg {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.28;
-    mix-blend-mode: multiply;
-  }
-
   /* Custom cursor */
   .cursor {
     position: fixed;
@@ -394,9 +382,8 @@
       transition-duration: 0.001ms !important;
       scroll-behavior: auto !important;
     }
-    #bg, .cursor, .scroll-dot { display: none !important; }
+    .cursor, .scroll-dot { display: none !important; }
   }
-  @media (prefers-reduced-data: reduce) { #bg { display: none; } }
 }
 
 /* Responsive */
@@ -454,7 +441,7 @@
     @page { margin: 18mm; }
     * { background: transparent !important; color: #000 !important; box-shadow: none !important; }
     body { background: #fff; font-size: 11pt; line-height: 1.4; }
-    #bg, .cursor, .scroll-dot, .site-header nav, .site-header .lang, .site-footer,
+    .cursor, .scroll-dot, .site-header nav, .site-header .lang, .site-footer,
     .hero .gutter-label, .hero .portrait { display: none !important; }
     .rule, .rule-red { background: #000 !important; }
     .display { font-size: 22pt; }

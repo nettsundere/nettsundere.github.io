@@ -64,21 +64,6 @@ test.describe('turbo navigation', () => {
     expect(await page.evaluate(sentinel)).toBe(true);
   });
 
-  test('keeps the background canvas node alive across a swap', async ({ page }) => {
-    await page.goto('/');
-    // Tag the live canvas; if the node survives the swap the tag is still there.
-    await page.evaluate(() => { const c = document.getElementById('bg'); if (c) c['__kept'] = true; });
-
-    await page.locator('nav[aria-label="Primary"] a', { hasText: 'Contact' }).click();
-    await expect(page).toHaveURL(/\/contact\.html$/);
-
-    const kept = await page.evaluate(() => {
-      const c = document.getElementById('bg');
-      return !!(c && c['__kept']);
-    });
-    expect(kept, 'the same #bg node was preserved across navigation').toBe(true);
-  });
-
   test('the language switch still does a real navigation', async ({ page }) => {
     // Cross-tree links work either way, but assert RU loads correctly.
     await page.goto('/');

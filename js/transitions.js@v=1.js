@@ -4,9 +4,8 @@
   /* Turbolinks-style client-side navigation. Internal link clicks are
      intercepted, the destination is fetched, and only the page body is
      swapped in — with a short crossfade on <main> — instead of a full
-     document reload. The #bg canvas node is preserved across swaps so the
-     background animation never flickers. Any failure falls back to a normal
-     browser navigation, so the site still works with JS disabled or broken. */
+     document reload. Any failure falls back to a normal browser navigation,
+     so the site still works with JS disabled or broken. */
 
   const html = document.documentElement;
   const supported = 'fetch' in window
@@ -102,11 +101,9 @@
   }
 
   /* --------------------------------------------------------------------- */
-  /* Body swap. The live #bg canvas node is kept in place so the background
-     animation is never detached; everything else is replaced. */
+  /* Body swap. Body attributes are mirrored, then all children replaced. */
   function swapBody(doc) {
     const newBody = document.importNode(doc.body, true);
-    const keepBg = document.getElementById('bg');
 
     // Mirror body attributes (data-page, data-lang, class, …).
     const incoming = new Set();
@@ -118,13 +115,8 @@
       if (!incoming.has(attr.name)) document.body.removeAttribute(attr.name);
     });
 
-    const newKids = Array.from(newBody.childNodes)
-      .filter((n) => !(n.nodeType === 1 && n.id === 'bg'));
-
-    // Remove old children except the preserved canvas, then append the new set.
-    Array.from(document.body.childNodes).forEach((n) => { if (n !== keepBg) n.remove(); });
-    if (keepBg && keepBg.parentNode !== document.body) document.body.appendChild(keepBg);
-    newKids.forEach((n) => document.body.appendChild(n));
+    Array.from(document.body.childNodes).forEach((n) => n.remove());
+    Array.from(newBody.childNodes).forEach((n) => document.body.appendChild(n));
   }
 
   /* --------------------------------------------------------------------- */

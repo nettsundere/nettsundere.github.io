@@ -3,12 +3,9 @@
 
   const RM = matchMedia('(prefers-reduced-motion: reduce)');
   const TOUCH = matchMedia('(hover: none), (pointer: coarse)');
-  const RD = matchMedia('(prefers-reduced-data: reduce)');
 
   const reducedMotion = () => RM.matches;
   const isTouch = () => TOUCH.matches;
-  const lowEnd = () => (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2)
-    || (navigator.deviceMemory && navigator.deviceMemory <= 1);
 
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
@@ -51,77 +48,6 @@
     window.addEventListener('scroll', onScroll, { passive: true, signal });
     onCleanup(() => clearTimeout(idleTimer));
     apply();
-  }
-
-  /* --------------------------------------------------------------------- */
-  /* Canvas halftone dot grid */
-  function initCanvas(signal) {
-    if (RD.matches || lowEnd()) return;
-    const canvas = document.getElementById('bg');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: true });
-    if (!ctx) { canvas.remove(); return; }
-
-    const DPR = Math.min(window.devicePixelRatio || 1, 1.5);
-    const GAP = 28;
-    const BASE_R = 1.6;
-    const MOUSE_RADIUS = 180;
-    const mouse = { x: -9999, y: -9999 };
-    let W = 0, H = 0, cols = 0, rows = 0, running = true, lastDraw = 0, rafId = 0;
-
-    const resize = () => {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      canvas.style.width = W + 'px';
-      canvas.style.height = H + 'px';
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      cols = Math.ceil(W / GAP) + 1;
-      rows = Math.ceil(H / GAP) + 1;
-    };
-
-    const draw = (t) => {
-      if (!running) return;
-      // Aim ~30fps cap
-      if (t - lastDraw < 33) { rafId = requestAnimationFrame(draw); return; }
-      lastDraw = t;
-      ctx.clearRect(0, 0, W, H);
-      const tt = t * 0.001;
-      for (let iy = 0; iy < rows; iy++) {
-        const y = iy * GAP;
-        for (let ix = 0; ix < cols; ix++) {
-          const x = ix * GAP;
-          const dx = x - mouse.x, dy = y - mouse.y;
-          const d = Math.sqrt(dx * dx + dy * dy);
-          const mouseFactor = d < MOUSE_RADIUS ? (1 - d / MOUSE_RADIUS) : 0;
-          const wave = 0.35 * Math.sin(tt * 0.7 + ix * 0.18 + iy * 0.22);
-          const r = BASE_R * (0.6 + 0.7 * mouseFactor) + wave;
-          if (r <= 0.05) continue;
-          // Red accent region drifting
-          const regionX = W * (0.5 + 0.35 * Math.sin(tt * 0.2));
-          const regionY = H * (0.4 + 0.3 * Math.cos(tt * 0.17));
-          const rdx = x - regionX, rdy = y - regionY;
-          const inRegion = (rdx * rdx + rdy * rdy) < 9000;
-          ctx.fillStyle = inRegion ? 'rgba(227,0,15,0.9)' : 'rgba(10,10,10,0.9)';
-          ctx.beginPath();
-          ctx.arc(x, y, r, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-      rafId = requestAnimationFrame(draw);
-    };
-
-    resize();
-    window.addEventListener('resize', resize, { passive: true, signal });
-    window.addEventListener('pointermove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true, signal });
-    window.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; }, { passive: true, signal });
-    document.addEventListener('visibilitychange', () => {
-      running = document.visibilityState !== 'hidden';
-      if (running) rafId = requestAnimationFrame(draw);
-    }, { signal });
-    onCleanup(() => { running = false; cancelAnimationFrame(rafId); });
-    rafId = requestAnimationFrame(draw);
   }
 
   /* --------------------------------------------------------------------- */
@@ -285,7 +211,6 @@
     cleanups = [];
     const signal = controller.signal;
     if (!reducedMotion()) parallax(signal);
-    if (!reducedMotion()) initCanvas(signal);
     if (!reducedMotion() && !isTouch()) magnetic(signal);
     if (!reducedMotion()) scrollDot(signal);
   }
