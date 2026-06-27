@@ -13,6 +13,15 @@
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
 
+  /* Per-page lifecycle. start() wires the page up; stop() tears everything
+     back down so the page can be re-initialised after a turbo navigation
+     without leaking window listeners or stacking requestAnimationFrame loops.
+     All listeners bind to controller.signal; all loops/created nodes register
+     a cleanup. */
+  let controller = null;
+  let cleanups = [];
+  const onCleanup = (fn) => cleanups.push(fn);
+
   const onReady = (fn) => {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn, { once: true });
     else fn();
@@ -20,7 +29,7 @@
 
   /* --------------------------------------------------------------------- */
   /* Parallax on portrait */
-  function parallax() {
+  function parallax(signal) {
     const target = document.querySelector('.portrait-frame img');
     if (!target) return;
     let y = 0, ticking = false, idleTimer;
@@ -39,13 +48,14 @@
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => { target.style.willChange = 'auto'; }, 200);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    onCleanup(() => clearTimeout(idleTimer));
     apply();
   }
 
   /* --------------------------------------------------------------------- */
   /* Canvas halftone dot grid */
-  function initCanvas() {
+  function initCanvas(signal) {
     if (RD.matches || lowEnd()) return;
     const canvas = document.getElementById('bg');
     if (!canvas) return;
@@ -57,7 +67,7 @@
     const BASE_R = 1.6;
     const MOUSE_RADIUS = 180;
     const mouse = { x: -9999, y: -9999 };
-    let W = 0, H = 0, cols = 0, rows = 0, running = true, lastDraw = 0;
+    let W = 0, H = 0, cols = 0, rows = 0, running = true, lastDraw = 0, rafId = 0;
 
     const resize = () => {
       W = window.innerWidth;
@@ -74,7 +84,7 @@
     const draw = (t) => {
       if (!running) return;
       // Aim ~30fps cap
-      if (t - lastDraw < 33) { requestAnimationFrame(draw); return; }
+      if (t - lastDraw < 33) { rafId = requestAnimationFrame(draw); return; }
       lastDraw = t;
       ctx.clearRect(0, 0, W, H);
       const tt = t * 0.001;
@@ -99,23 +109,24 @@
           ctx.fill();
         }
       }
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     };
 
     resize();
-    window.addEventListener('resize', resize, { passive: true });
-    window.addEventListener('pointermove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-    window.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; }, { passive: true });
+    window.addEventListener('resize', resize, { passive: true, signal });
+    window.addEventListener('pointermove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true, signal });
+    window.addEventListener('pointerleave', () => { mouse.x = -9999; mouse.y = -9999; }, { passive: true, signal });
     document.addEventListener('visibilitychange', () => {
       running = document.visibilityState !== 'hidden';
-      if (running) requestAnimationFrame(draw);
-    });
-    requestAnimationFrame(draw);
+      if (running) rafId = requestAnimationFrame(draw);
+    }, { signal });
+    onCleanup(() => { running = false; cancelAnimationFrame(rafId); });
+    rafId = requestAnimationFrame(draw);
   }
 
   /* --------------------------------------------------------------------- */
   /* Square cursor follower */
-  function cursor() {
+  function cursor(signal) {
     const el = document.createElement('div');
     el.className = 'cursor';
     el.setAttribute('aria-hidden', 'true');
@@ -141,20 +152,22 @@
         el.classList.add('is-visible');
         raf = requestAnimationFrame(tick);
       }
-    }, { passive: true });
+    }, { passive: true, signal });
 
     const hoverable = 'a, button, .magnetic';
     document.addEventListener('pointerover', (e) => {
       if (e.target.closest && e.target.closest(hoverable)) el.classList.add('is-hover');
-    });
+    }, { signal });
     document.addEventListener('pointerout', (e) => {
       if (e.target.closest && e.target.closest(hoverable)) el.classList.remove('is-hover');
-    });
+    }, { signal });
+
+    onCleanup(() => { cancelAnimationFrame(raf); el.remove(); });
   }
 
   /* --------------------------------------------------------------------- */
   /* Magnetic links */
-  function magnetic() {
+  function magnetic(signal) {
     const links = document.querySelectorAll('a.magnetic');
     if (!links.length) return;
     const STRENGTH = 0.18;
@@ -174,14 +187,14 @@
         a.style.transform = `translate3d(${dx * STRENGTH}px, ${dy * STRENGTH}px, 0)`;
       };
       const onLeave = () => { a.style.transform = ''; };
-      a.addEventListener('pointermove', onMove);
-      a.addEventListener('pointerleave', onLeave);
+      a.addEventListener('pointermove', onMove, { signal });
+      a.addEventListener('pointerleave', onLeave, { signal });
     });
   }
 
   /* --------------------------------------------------------------------- */
   /* One red square — launches from the VK. glyph, weaves to cursor, becomes cursor bg */
-  function scrollDot() {
+  function scrollDot(signal) {
     if (isTouch()) return;
     const sources = document.querySelectorAll('.display .dot, .post-title .dot');
     sources.forEach((s) => { s.style.visibility = 'hidden'; });
@@ -223,6 +236,7 @@
     let cx = originX, cy = originY;
     let gotCursor = false;
     let startT = 0;
+    let rafId = 0;
 
     const render = (x, y, op) => {
       dot.style.opacity = op;
@@ -234,7 +248,7 @@
     window.addEventListener('pointermove', (e) => {
       cx = e.clientX; cy = e.clientY;
       if (!gotCursor) { gotCursor = true; startT = performance.now(); }
-    }, { passive: true });
+    }, { passive: true, signal });
 
     const tick = (t) => {
       if (!gotCursor) {
@@ -257,16 +271,31 @@
           render(pos.x, pos.y, 0.5);
         }
       }
-      requestAnimationFrame(tick);
+      rafId = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
+    onCleanup(() => { cancelAnimationFrame(rafId); dot.remove(); });
   }
 
   /* --------------------------------------------------------------------- */
-  onReady(() => {
-    if (!reducedMotion()) parallax();
-    if (!reducedMotion()) initCanvas();
-    if (!reducedMotion() && !isTouch()) magnetic();
-    if (!reducedMotion()) scrollDot();
-  });
+  /* Lifecycle. cursor() is defined but, like the original, left unwired. */
+  function start() {
+    if (controller) return;
+    controller = new AbortController();
+    cleanups = [];
+    const signal = controller.signal;
+    if (!reducedMotion()) parallax(signal);
+    if (!reducedMotion()) initCanvas(signal);
+    if (!reducedMotion() && !isTouch()) magnetic(signal);
+    if (!reducedMotion()) scrollDot(signal);
+  }
+
+  function stop() {
+    if (controller) { controller.abort(); controller = null; }
+    cleanups.forEach((fn) => { try { fn(); } catch (_) {} });
+    cleanups = [];
+  }
+
+  window.__site = { start, stop };
+  onReady(start);
 })();

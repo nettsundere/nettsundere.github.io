@@ -369,6 +369,24 @@
 }
 
 @layer motion {
+  /* Turbo (client-side) navigation affordance. The bar is delayed so that
+     instant / cached swaps never flash it; only slower fetches reveal it. */
+  html.is-navigating { cursor: progress; }
+  html.is-navigating::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, var(--c-red), transparent);
+    z-index: 9999;
+    pointer-events: none;
+    animation: turbo-bar 900ms linear 140ms infinite;
+  }
+  @keyframes turbo-bar { to { transform: translateX(100%); } }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.001ms !important;
