@@ -30,7 +30,8 @@
   letter-spacing: -0.015em;
   line-height: 1.05;
   text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 0.045em;
   transition: color 0.3s ease;
 }
 .post-row:hover .post-title { color: var(--c-red); }
@@ -173,7 +174,8 @@
   letter-spacing: -0.01em;
   line-height: 1.1;
   text-decoration: underline;
-  text-underline-offset: 0.12em;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 0.045em;
   transition: color 0.3s ease;
 }
 .post-nav a:hover .nav-title { color: var(--c-red); }
