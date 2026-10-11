@@ -1,0 +1,481 @@
+/* A page of its own: three fonts, each shown on the ground that suits it.
+   Nothing here depends on the blog's stylesheet. */
+
+@font-face { font-family: "Lords"; src: url("../fonts/lords/Lords-Regular.ttf?v=19") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Lords"; src: url("../fonts/lords/Lords-Bold.ttf?v=19") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Lords Connected"; src: url("../fonts/lords-connected/LordsConnected-Regular.ttf?v=32") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Lords Connected"; src: url("../fonts/lords-connected/LordsConnected-Bold.ttf?v=32") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Regular.ttf?v=13") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Bold.ttf?v=13") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Italic.ttf?v=13") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+
+:root {
+  --ink: #16130f;
+  --paper: #f6f3ec;
+  --muted: #6b645a;
+  --line: rgba(22, 19, 15, 0.16);
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "PT Serif", Georgia, serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --pad: clamp(1rem, 4vw, 3.5rem);
+  --measure: 40rem;
+
+  /* Lords: a book hand, ink on parchment */
+  --lords-ground: #efe3c6;
+  --lords-ink: #2a1a0e;
+  --lords-red: #8f2a17;
+
+  /* Lords Connected: a letter, blue-black ink on ruled cream paper */
+  --lc-ground: #fbf8f0;
+  --lc-ink: #1b2a4a;
+  --lc-rule: rgba(70, 110, 170, 0.28);
+  --lc-margin: rgba(196, 64, 64, 0.45);
+
+  /* Neftyanochka: crude oil, the letters lit warm */
+  --oil-ground: #12100d;
+  --oil-ink: #f1e3c4;
+  --oil-muted: #b3a283;
+  --oil-amber: #e0a43a;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.95rem + 0.35vw, 1.25rem);
+  line-height: 1.6;
+}
+a { color: inherit; text-underline-offset: 0.18em; text-decoration-thickness: 0.06em; }
+a:hover { text-decoration-thickness: 0.12em; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+
+/* ---- the strip at the top: home, sections, language ---- */
+.fp-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 1rem var(--pad);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--line);
+}
+.fp-top .mark { font-weight: 700; text-decoration: none; }
+.fp-top nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; margin-right: auto; }
+.fp-top nav a { text-decoration: none; color: var(--muted); }
+.fp-top nav a:hover, .fp-top nav .is-active { color: var(--ink); }
+.fp-top nav .is-active { text-decoration: underline; }
+.fp-top .lang a, .fp-top .lang span { text-decoration: none; }
+.fp-top .lang .is-active { font-weight: 700; }
+.fp-top .lang .sep { color: var(--muted); margin-inline: 0.35em; }
+
+/* ---- opening ---- */
+.fp-hero { padding: clamp(3rem, 9vw, 7rem) var(--pad) clamp(2rem, 5vw, 4rem); }
+.fp-date { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.fp-hero .post-title {
+  margin-top: 0.75rem;
+  font-size: clamp(2.75rem, 9vw, 6.5rem);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.fp-lede { margin-top: 1.5rem; max-width: var(--measure); font-size: 1.2em; }
+.fp-index {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+.fp-index a {
+  display: block;
+  padding: 1.25rem 1rem 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  min-height: 7.5rem;
+}
+.fp-index .n { display: block; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; opacity: 0.75; }
+.fp-index .name { display: block; margin-top: 0.4rem; font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.1; }
+.fp-index .lords { background: var(--lords-ground); color: var(--lords-ink); }
+.fp-index .lords .name { font-family: "Lords", var(--serif); }
+.fp-index .lc { background: var(--lc-ground); color: var(--lc-ink); box-shadow: inset 0 0 0 1px var(--line); }
+.fp-index .lc .name { font-family: "Lords Connected", var(--serif); }
+.fp-index .oil { background: var(--oil-ground); color: var(--oil-ink); }
+.fp-index .oil .name { font-family: "Neftyanochka", var(--serif); }
+.fp-index a:hover .name { text-decoration: underline; text-decoration-thickness: 0.05em; }
+
+/* ---- one font: a full-width band in its own colours ---- */
+.font {
+  padding: clamp(3rem, 8vw, 6rem) var(--pad);
+}
+.font-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1.5rem; }
+.font-no { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+.font-name { font-size: clamp(3.5rem, 13vw, 9.5rem); line-height: 1; font-weight: 400; letter-spacing: 0; }
+.font-what { margin-top: 0.25rem; font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.02em; opacity: 0.85; flex-basis: 100%; }
+
+/* The specimen: the visitor can type into it. */
+.specimen {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.75rem, 4.6vw, 3.4rem);
+  line-height: 1.45;
+  letter-spacing: 0;              /* joined letters must not be pulled apart */
+  word-spacing: normal;
+  font-kerning: normal;
+  outline: none;
+  overflow-wrap: anywhere;
+  max-width: 22em;
+  cursor: text;
+}
+.specimen:focus-visible { box-shadow: 0 0 0 2px currentColor; border-radius: 2px; }
+.try { margin-top: 0.75rem; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em; opacity: 0.7; }
+
+.sets { margin-top: clamp(2rem, 5vw, 3rem); display: grid; gap: 0.6rem; font-size: clamp(1.15rem, 2.4vw, 1.6rem); line-height: 1.35; }
+.sets p { overflow-wrap: anywhere; }
+.sets .lbl { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; margin-bottom: 0.15rem; }
+.styles { margin-top: clamp(2rem, 5vw, 3rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem 2rem; }
+.styles p { font-size: clamp(1.6rem, 3.6vw, 2.4rem); line-height: 1.5; }
+.styles .lbl { display: block; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+
+.font-text { margin-top: clamp(2.5rem, 6vw, 4rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.5rem 3rem; max-width: 64rem; font-family: var(--serif); font-size: 1rem; line-height: 1.65; }
+.font-text h3 { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; margin-bottom: 0.5rem; }
+.font-text p + p { margin-top: 0.75rem; }
+
+.get { margin-top: clamp(2rem, 5vw, 3rem); display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; font-family: var(--mono); font-size: 0.85rem; }
+.get .zip {
+  display: inline-block;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.get .files a { margin-right: 0.9rem; }
+
+/* Lords: parchment */
+.font--lords {
+  background-color: var(--lords-ground);
+  background-image:
+    radial-gradient(120% 90% at 50% 40%, rgba(255, 250, 235, 0.55), transparent 70%),
+    radial-gradient(80% 60% at 100% 100%, rgba(120, 80, 30, 0.12), transparent 70%);
+  color: var(--lords-ink);
+}
+.font--lords .font-name, .font--lords .specimen, .font--lords .sets p, .font--lords .styles p { font-family: "Lords", var(--serif); }
+.font--lords .font-no, .font--lords .font-what { color: var(--lords-red); opacity: 1; }
+.font--lords .get .zip { background: var(--lords-ink); color: var(--lords-ground); }
+
+/* Lords Connected: ruled letter paper with a margin line; the rules follow the specimen's lines */
+.font--lc {
+  background:
+    /* laid paper: faint horizontal chain lines and even fainter verticals */
+    repeating-linear-gradient(to bottom, transparent 0, transparent 26px, rgba(120, 96, 58, 0.05) 26px, rgba(120, 96, 58, 0.05) 27px),
+    repeating-linear-gradient(to right, transparent 0, transparent 31px, rgba(120, 96, 58, 0.025) 31px, rgba(120, 96, 58, 0.025) 32px),
+    /* aged edges */
+    radial-gradient(120% 140% at 12% 18%, rgba(168, 138, 88, 0.09), transparent 55%),
+    radial-gradient(120% 140% at 88% 82%, rgba(168, 138, 88, 0.08), transparent 55%),
+    var(--lc-ground);
+  color: var(--lc-ink);
+  border-block: 1px solid var(--line);
+}
+.font--lc .font-name, .font--lc .specimen, .font--lc .sets p, .font--lc .styles p, .font--lc .long p { font-family: "Lords Connected", var(--serif); }
+.font--lc .specimen {
+  padding-left: 1.2rem;
+}
+.font--lc .get .zip { background: var(--lc-ink); color: var(--lc-ground); }
+/* A longer run at a handwriting size, on the same ruled paper */
+.font--lc .long {
+  margin-top: 1.5rem;
+  max-width: var(--measure);
+  font-size: 1.725rem;
+  line-height: 1.55;
+  padding-left: 1.2rem;
+}
+.font--lc .long p + p { margin-top: 1rem; }
+.font--lc .long .note { line-height: 1.5; }
+
+/* Neftyanochka: crude oil, a faint sheen on it */
+.font--oil {
+  background-color: var(--oil-ground);
+  background-image:
+    radial-gradient(70% 50% at 15% 10%, rgba(64, 96, 120, 0.22), transparent 70%),
+    radial-gradient(60% 45% at 85% 25%, rgba(110, 70, 120, 0.18), transparent 70%),
+    radial-gradient(90% 60% at 50% 100%, rgba(224, 164, 58, 0.10), transparent 70%);
+  color: var(--oil-ink);
+}
+.font--oil .font-name, .font--oil .specimen, .font--oil .sets p, .font--oil .styles p { font-family: "Neftyanochka", var(--serif); }
+.font--oil .font-no, .font--oil .font-what { color: var(--oil-amber); opacity: 1; }
+.font--oil .font-text, .font--oil .try, .font--oil .sets .lbl, .font--oil .styles .lbl { color: var(--oil-muted); opacity: 1; }
+.font--oil a { color: var(--oil-ink); }
+.font--oil .get .zip { background: var(--oil-amber); color: var(--oil-ground); }
+.font--oil ::selection { background: var(--oil-amber); color: var(--oil-ground); }
+
+/* ---- prose: the story, the principles, the licence ---- */
+.prose { padding: clamp(3rem, 8vw, 6rem) var(--pad); }
+.prose > * { max-width: var(--measure); }
+.prose h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+.prose h3 { margin-top: 2rem; font-family: var(--mono); font-size: 0.8rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.prose p, .prose ul, .prose ol { margin-top: 1rem; }
+.prose p, .prose h2, .prose h3, .prose li, .prose blockquote { hanging-punctuation: first last allow-end; }
+.prose ul, .prose ol { padding-left: 1.25rem; }
+.prose li + li { margin-top: 0.4rem; }
+.prose .by { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.prose--story { background: #ebe6db; }
+.prose--licence { border-top: 1px solid var(--line); }
+.fin { margin-top: 2.5rem; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1; }
+
+/* ---- the way out ---- */
+.post-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  padding: 2rem var(--pad);
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.post-nav a { text-decoration: none; display: grid; gap: 0.25rem; }
+.post-nav .nav-label { color: var(--muted); }
+.post-nav .nav-title { font-family: var(--serif); font-size: 1.15rem; text-decoration: underline; text-underline-offset: 0.18em; }
+.fp-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  padding: 1.5rem var(--pad) 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.fp-foot .back-link { color: var(--ink); font-weight: 700; text-decoration: none; }
+
+@media (max-width: 720px) {
+  .fp-index { grid-template-columns: 1fr; }
+  .fp-index a { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fp-index a { transition: transform 0.2s ease; }
+  .fp-index a:hover { transform: translateY(-2px); }
+}
+
+@media print {
+  .fp-top nav, .post-nav, .get { display: none; }
+  .font { break-inside: avoid; }
+}
+
+/* ---- ligatures: the feature on, then the same text with it off ---- */
+.ligs { margin-top: clamp(2rem, 5vw, 3rem); }
+.ligs .lbl { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7; }
+.lig-row {
+  margin-top: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.25rem 2rem;
+  font-size: clamp(1.4rem, 3.4vw, 2.2rem);
+  line-height: 1.3;
+}
+.font--lords .lig-row, .font--lords .ligs { font-family: "Lords", var(--serif); }
+.font--lc .lig-row { font-family: "Lords Connected", var(--serif); }
+.font--oil .lig-row { font-family: "Neftyanochka", var(--serif); }
+.lig-row .off {
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "clig" 0, "calt" 0, "dlig" 0;
+  opacity: 0.45;
+}
+.lig-row .off::before {
+  content: "off ";
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+}
+.ligs .lbl { margin-bottom: 0.25rem; }
+
+/* ---- languages table ---- */
+.langs { margin-top: 1.5rem; width: 100%; max-width: 48rem; border-collapse: collapse; font-size: 0.95rem; }
+.langs th, .langs td { padding: 0.55rem 0.75rem 0.55rem 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.langs thead th { font-family: var(--mono); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); vertical-align: baseline; }
+.langs thead th:nth-child(2) { font-family: "Lords", var(--serif); font-size: 1.05rem; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.langs thead th:nth-child(3) { font-family: "Lords Connected", var(--serif); font-size: 1.05rem; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.langs thead th:nth-child(4) { font-family: "Neftyanochka", var(--serif); font-size: 1.05rem; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.langs td { font-family: var(--mono); font-size: 0.85rem; }
+.langs tbody th { font-weight: 400; }
+@media (max-width: 560px) {
+  .langs { font-size: 0.85rem; }
+  .langs th, .langs td { padding-right: 0.4rem; }
+}
+.styles .lbl { font-weight: 400; font-style: normal; }
+.prose--how { background: var(--paper); }
+.prose strong { font-weight: 700; }
+html:lang(ru) .lig-row .off::before { content: "выкл. "; }
+
+/* ===================== bigger, and moving ===================== */
+.font-name { font-size: clamp(4.5rem, 17vw, 15rem); line-height: 0.95; }
+.specimen { font-size: clamp(2.4rem, 7.2vw, 6.4rem); line-height: 1.32; max-width: 15em; }
+.font--lc .specimen { line-height: 1.45; }
+.sets { font-size: clamp(1.5rem, 3.6vw, 2.6rem); gap: 1rem; }
+.styles p { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.45; }
+.lig-row { font-size: clamp(1.9rem, 4.8vw, 3.6rem); }
+
+/* a section is a stage: the ghost behind, everything else in front */
+.font { position: relative; overflow: clip; isolation: isolate; }
+.font > :not(.ghost) { position: relative; z-index: 1; }
+.ghost {
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  right: -6vw;
+  font-size: clamp(10rem, 38vw, 34rem);
+  line-height: 1;
+  white-space: nowrap;
+  opacity: 0.075;
+  pointer-events: none;
+  user-select: none;
+}
+.font--lords .ghost { font-family: "Lords", var(--serif); }
+.font--lc .ghost { font-family: "Lords Connected", var(--serif); top: 30%; right: auto; left: -4vw; }
+.font--oil .ghost { font-family: "Neftyanochka", var(--serif); opacity: 0.09; color: var(--oil-amber); top: 40%; }
+
+/* the signature letters, huge */
+.glyphs {
+  margin-top: clamp(2rem, 6vw, 4rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(1.5rem, 5vw, 4.5rem);
+  font-size: clamp(6rem, 22vw, 16rem);
+  line-height: 1.1;
+}
+.glyphs span { display: inline-block; }
+.font--lords .glyphs { font-family: "Lords", var(--serif); }
+.font--lc .glyphs { font-family: "Lords Connected", var(--serif); }
+.font--oil .glyphs { font-family: "Neftyanochka", var(--serif); }
+.font--oil .glyphs span:nth-child(odd) { color: var(--oil-amber); }
+.font--lords .glyphs span:nth-child(3) { color: var(--lords-red); }
+
+/* the hero bands: the three names, sliding */
+.strip { margin-top: clamp(2.5rem, 7vw, 5rem); margin-inline: calc(var(--pad) * -1); overflow: clip; }
+.strip-row { white-space: nowrap; font-size: clamp(3rem, 10vw, 8.5rem); line-height: 1.2; }
+.strip .s1 { font-family: "Lords", var(--serif); color: var(--lords-ink); background: var(--lords-ground); }
+.strip .s2 { font-family: "Lords Connected", var(--serif); color: var(--lc-ink); background: var(--lc-ground); }
+.strip .s3 { font-family: "Neftyanochka", var(--serif); color: var(--oil-ink); background: var(--oil-ground); }
+/* The joined script reads best at handwriting size, so its strip is smaller. */
+.strip .s2 { font-size: clamp(1.75rem, 5.5vw, 4rem); line-height: 1.4; }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes ll-drift { from { transform: translateY(calc(var(--speed, 1) * 40px)); } to { transform: translateY(calc(var(--speed, 1) * -40px)); } }
+    @keyframes ll-ghost { from { transform: translateY(18vh); } to { transform: translateY(-28vh); } }
+    @keyframes ll-ghost-side { from { transform: translateX(-12vw); } to { transform: translateX(10vw); } }
+    @keyframes ll-left { from { transform: translateX(0); } to { transform: translateX(-35%); } }
+    @keyframes ll-right { from { transform: translateX(-35%); } to { transform: translateX(0); } }
+    @keyframes ll-rise { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+    @keyframes ll-sheen { from { background-position: 0% 0%, 100% 0%, 50% 100%; } to { background-position: 30% 60%, 60% 40%, 50% 0%; } }
+
+    .glyphs span { animation: ll-drift linear both; animation-timeline: view(); }
+    .ghost { animation: ll-ghost linear both; animation-timeline: view(); animation-range: cover; }
+    .font--lc .ghost { animation-name: ll-ghost-side; }
+    .strip .s1, .strip .s3 { animation: ll-left linear both; animation-timeline: view(); }
+    .strip .s2 { animation: ll-right linear both; animation-timeline: view(); }
+    .font-head, .specimen, .sets, .ligs, .styles, .font-text, .get {
+      animation: ll-rise ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+    .font--oil { background-size: 160% 160%, 160% 160%, 140% 140%; animation: ll-sheen linear both; animation-timeline: view(); }
+  }
+}
+
+/* ---- Bashkir and Tatar: real text, large, each on its font's ground ---- */
+.bt-head { padding: clamp(3rem, 8vw, 6rem) var(--pad) clamp(1.5rem, 4vw, 2.5rem); }
+.bt-head h2 { font-size: clamp(2.4rem, 7vw, 5.5rem); font-weight: 400; line-height: 1; letter-spacing: -0.01em; }
+.bt-head p { margin-top: 1rem; max-width: var(--measure); }
+.bt-row { position: relative; overflow: clip; padding: clamp(2.5rem, 7vw, 5rem) var(--pad); }
+.bt-row .lbl { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+.bt-text { margin-top: 0.75rem; font-size: clamp(2rem, 5.4vw, 4.6rem); line-height: 1.3; max-width: 18em; outline: none; overflow-wrap: anywhere; letter-spacing: 0; }
+.bt-text:focus-visible { box-shadow: 0 0 0 2px currentColor; border-radius: 2px; }
+.bt-gloss { margin-top: 1.25rem; max-width: var(--measure); font-size: 0.95rem; line-height: 1.55; opacity: 0.8; }
+.bt--lords { background: var(--lords-ground); color: var(--lords-ink); }
+.bt--lords .bt-text { font-family: "Lords", var(--serif); }
+.bt--lords .lbl { color: var(--lords-red); opacity: 1; }
+.bt--lc { background: var(--lc-ground); color: var(--lc-ink); border-block: 1px solid var(--line); }
+.bt--lc .bt-text { font-family: "Lords Connected", var(--serif); line-height: 1.45; }
+.bt--oil { background: var(--oil-ground); color: var(--oil-ink); }
+.bt--oil .bt-text { font-family: "Neftyanochka", var(--serif); }
+.bt--oil .lbl { color: var(--oil-amber); opacity: 1; }
+.bt--oil .bt-gloss { color: var(--oil-muted); opacity: 1; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bt-text { animation: ll-rise ease-out both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  }
+}
+
+/* fixes after looking: long names fit, letters never ride into the hint, bands stay full width */
+.font-name { font-size: clamp(3rem, 12.5vw, 12.5rem); }
+.font--lords .font-name { font-size: clamp(4.5rem, 19vw, 16rem); }
+.glyphs { margin-top: clamp(4rem, 11vw, 8rem); }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes ll-drift { from { transform: translateY(calc(var(--speed, 1) * 22px)); } to { transform: translateY(calc(var(--speed, 1) * -22px)); } }
+  }
+}
+.strip-row { width: max-content; min-width: 260vw; }
+
+/* one big word per font, with what it means; it fits the width and moves as a whole */
+.glyphs { display: none; }
+.bigword { margin: clamp(3.5rem, 9vw, 7rem) 0 0; }
+.bigword p {
+  font-size: clamp(4.5rem, 19vw, 15rem);
+  line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: normal;
+  padding-block: 0.08em 0.12em;
+}
+.bigword figcaption { margin-top: 0.5rem; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.04em; opacity: 0.75; max-width: 40rem; }
+.font--lords .bigword p { font-family: "Lords", var(--serif); color: var(--lords-red); }
+.font--lc .bigword p { font-family: "Lords Connected", var(--serif); font-size: clamp(3.4rem, 11vw, 10rem); line-height: 1.3; }
+.font--oil .bigword p { font-family: "Neftyanochka", var(--serif); color: var(--oil-amber); font-size: clamp(6rem, 30vw, 22rem); line-height: 1.05; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes ll-slide { from { transform: translateX(-4vw); } to { transform: translateX(4vw); } }
+    .bigword p { animation: ll-slide linear both; animation-timeline: view(); }
+  }
+}
+
+/* the languages table on the narrowest phones: fixed columns, font names break at syllables */
+@media (max-width: 480px) {
+  .langs { table-layout: fixed; }
+  .langs thead th:first-child, .langs tbody th { width: 36%; }
+  .langs thead th:not(:first-child) { font-size: 0.95rem; hyphens: manual; line-height: 1.15; }
+  .langs td { font-size: 0.78rem; }
+  .langs tbody th { overflow-wrap: anywhere; }
+}
+
+/* styles: one per row, so a long word never runs into its neighbour */
+.styles { grid-template-columns: 1fr; gap: 1.25rem; }
+.styles p { overflow-wrap: break-word; }
+
+/* a little room at the line end: WebKit sets some lines a few pixels wider than Chrome */
+.specimen, .bt-text { padding-inline-end: 0.5em; box-sizing: border-box; }
+
+/* the oil row: one line per language on a desktop, each tagged with its language */
+.bt--oil .bt-text { font-size: clamp(1.6rem, 4.2vw, 3.6rem); max-width: none; line-height: 1.4; }
+.bt--oil .bt-text span[lang]::before {
+  content: attr(lang);
+  display: inline-block;
+  width: 2.6em;
+  font-family: var(--mono);
+  font-size: 0.28em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: 0.6em;
+  color: var(--oil-amber);
+}
+.bt--oil .bt-text { font-size: clamp(1.5rem, 3.7vw, 3.2rem); }
+
+/* Lords Connected: the "off" comparison waits for the rebuilt font, where
+   plain letters stay on the line with contextual forms off */
+/* restored with the fixed font (2026-10-10): plain letters stay on the line */

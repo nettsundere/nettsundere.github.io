@@ -123,6 +123,7 @@
   function scrollDot(signal) {
     if (isTouch()) return;
     const sources = document.querySelectorAll('.display .dot, .post-title .dot');
+    if (!sources.length) return;
     sources.forEach((s) => { s.style.visibility = 'hidden'; });
 
     const SIZE = 16;

@@ -18,10 +18,14 @@ const SLUGS = [
   '19-10-2021-the-peculiarities-of-the-yaml',
   '25-11-2021-on-how-to-measure-the-developer-productivity',
   '28-06-2026-what-do-i-do-when-the-llm-comes',
+  '10-10-2026-a-couple-of-fonts',
 ];
 
 /** Posts written natively for this site — they carry no Medium attribution. */
-const ORIGINAL = new Set(['28-06-2026-what-do-i-do-when-the-llm-comes']);
+const ORIGINAL = new Set([
+  '28-06-2026-what-do-i-do-when-the-llm-comes',
+  '10-10-2026-a-couple-of-fonts',
+]);
 
 /**
  * In-body "See also" cross-references between posts: source slug -> target
