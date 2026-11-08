@@ -39,7 +39,7 @@ const PAGES = [
     path: '/ru-ru/index.html',
     lang: 'ru',
     dataPage: 'home',
-    titleContains: 'Владимир Киселев',
+    titleContains: 'Владимир Киселёв',
     h1: 'Привет',
     activeNav: 'Главная',
   },
@@ -79,7 +79,52 @@ const PAGES = [
     h1: 'Блог',
     activeNav: 'Блог',
   },
+  {
+    name: 'home (zh)',
+    path: '/zh-cn/index.html',
+    lang: 'zh-CN',
+    dataLang: 'zh',
+    dataPage: 'home',
+    titleContains: '弗拉基米尔·基谢廖夫',
+    h1: '你好',
+    activeNav: '首页',
+  },
+  {
+    name: 'résumé (zh)',
+    path: '/zh-cn/resume.html',
+    lang: 'zh-CN',
+    dataLang: 'zh',
+    dataPage: 'resume',
+    titleContains: '简历',
+    h1: '简历',
+    activeNav: '简历',
+  },
+  {
+    name: 'contact (zh)',
+    path: '/zh-cn/contact.html',
+    lang: 'zh-CN',
+    dataLang: 'zh',
+    dataPage: 'contact',
+    titleContains: '联系',
+    h1: '来信',
+    activeNav: '联系',
+  },
+  {
+    name: 'writing index (zh)',
+    path: '/zh-cn/blog.html',
+    lang: 'zh-CN',
+    dataLang: 'zh',
+    dataPage: 'blog',
+    titleContains: '文章',
+    h1: '文章',
+    activeNav: '文章',
+  },
 ];
+
+/** The language switcher lists these, in this order, on every page. */
+const SWITCHER = ['EN', 'RU', '中文'];
+/** The switcher entry for each page language. */
+const SWITCHER_ENTRY = { en: 'EN', ru: 'RU', 'zh-CN': '中文' };
 
 for (const page of PAGES) {
   test.describe(`page: ${page.name} (${page.path})`, () => {
@@ -91,7 +136,28 @@ for (const page of PAGES) {
       await expect(p).toHaveTitle(new RegExp(page.titleContains));
       await expect(p.locator('html')).toHaveAttribute('lang', page.lang);
       await expect(p.locator('body')).toHaveAttribute('data-page', page.dataPage);
-      await expect(p.locator('body')).toHaveAttribute('data-lang', page.lang);
+      await expect(p.locator('body')).toHaveAttribute('data-lang', page.dataLang ?? page.lang);
+    });
+
+    test('the language switcher offers every language and marks this one', async ({ page: p }) => {
+      await p.goto(page.path);
+      const lang = p.locator('.site-header .lang');
+      await expect(lang.locator(':scope > a, :scope > .is-active')).toHaveText(SWITCHER);
+      await expect(lang.locator('.is-active')).toHaveText(SWITCHER_ENTRY[page.lang]);
+      // every other entry is a link to a page that exists
+      for (const a of await lang.locator('a').all()) {
+        const href = await a.getAttribute('href');
+        const res = await p.request.get(new URL(href, p.url()).href);
+        expect(res.status(), `${href} from ${page.path}`).toBe(200);
+      }
+    });
+
+    test('fits a 320-px wide screen without horizontal scrolling', async ({ page: p }) => {
+      await p.setViewportSize({ width: 320, height: 640 });
+      await p.goto(page.path);
+      await p.evaluate(() => document.fonts.ready);
+      const width = await p.evaluate(() => document.documentElement.scrollWidth);
+      expect(width).toBeLessThanOrEqual(320);
     });
 
     test('renders the main heading', async ({ page: p }) => {
@@ -106,6 +172,8 @@ for (const page of PAGES) {
       const nav = p.locator('nav[aria-label="Primary"]');
       await expect(nav).toBeVisible();
       await expect(nav.locator('.is-active', { hasText: page.activeNav })).toBeVisible();
+      // not by colour alone: screen readers hear "current page" too
+      await expect(nav.locator('.is-active')).toHaveAttribute('aria-current', 'page');
     });
 
     test('loads without console or page errors', async ({ page: p }) => {

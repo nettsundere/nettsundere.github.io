@@ -10,3 +10,13 @@ test.describe('page: ru-ru.html (redirect)', () => {
     await expect(page.locator('h1.display')).toContainText('Привет');
   });
 });
+
+// zh-cn.html is a meta-refresh redirect to the Chinese home page.
+test.describe('page: zh-cn.html (redirect)', () => {
+  test('redirects to the Chinese home page', async ({ page }) => {
+    await page.goto('/zh-cn.html');
+    await page.waitForURL('**/zh-cn/index.html');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
+    await expect(page.locator('h1.display')).toContainText('你好');
+  });
+});

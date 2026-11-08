@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>JSON 的怪癖 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="一个已有 21 年历史的格式的意外特点：没有注释，没有版本，ECMA-404。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/01-10-2021-the-peculiarities-of-json.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/01-10-2021-the-peculiarities-of-json.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="JSON 的怪癖">
+  <meta property="og:description" content="一个已有 21 年历史的格式的意外特点：没有注释，没有版本，ECMA-404。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/01-10-2021-the-peculiarities-of-json.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JSON 的怪癖">
+  <meta name="twitter:description" content="一个已有 21 年历史的格式的意外特点：没有注释，没有版本，ECMA-404。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "JSON 的怪癖",
+    "datePublished": "2021-10-01",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/01-10-2021-the-peculiarities-of-json.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/01-10-2021-the-peculiarities-of-json.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/01-10-2021-the-peculiarities-of-json.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/01-10-2021-the-peculiarities-of-json.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-10-01">2021年10月1日</time></p>
+      <h1 class="post-title">JSON 的怪癖<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<h3>JSON 对许多软件开发者来说是家常便饭，对做任何与 Web 相关工作的人更是如此。这个格式本身已经 21 岁了，我们来聊聊它身上一些令人意外的特点</h3><figure><img alt="" src="../../images/blog/8xC1JcA784mDHjM_oDRlvA.jpeg" /><figcaption>照片：<a href="https://www.pexels.com/@schneewolf?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Annika Thierfeld</a>，来自 <a href="https://www.pexels.com/photo/photo-of-reindeer-in-the-snow-735987/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><p><em>在设计上就没有注释</em>——也就是说，它没有注释的语法，所以自然有很多格式又把注释加了回来（比如 JSONC）。有趣的是，注释其实是从最初的 JSON 标准里被删掉的。</p><p>从 JSON 中删掉注释，让 <em>YAML 更接近于 JSON 的超集</em>。YAML 并不像很多人以为的那样（*根据我的观察）是很多年后才出现的东西，YAML 也已经 20 岁了</p><p><em>没有安全的办法来扩展或重新定义 JSON</em>（它没有版本号，而且无论如何都不应该被修改）</p><p><em>数字</em>。尽管名叫 JSON（据道格拉斯·克罗克福德说，最初尝试的名字是 JSML），JSON 的数字却不是 JavaScript 的数字。JSON 的数字不是 IEEE-754 之类标准的超集（你无法编码 NaN 和 +- Infinity，而它们在 JavaScript 和许多其他语言里都是合法的值），但你可以表示整数或者（有时是）有理数。至于其他东西，你得用字符串（或者干脆闭上眼睛，祈祷一切顺利）</p><p>看看 JSON 标准的名字：<em>ECMA-404</em>（我很好奇这是不是一个双关）</p><h3><strong>链接</strong></h3><p><strong>JSON</strong> 网站 <a href="https://json.org">https://json.org</a>——JSON 的网站（顺便说一句，JSON 的 logo 很酷）</p><p>JSON 的 <strong>ECMA-404</strong> 标准（这个 404 看着可真眼熟）<a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">https://www.ecma-international.org/publications-and-standards/standards/ecma-404/</a></p><p><strong>Douglas Crockford: The JSON Saga</strong> <a href="https://www.youtube.com/watch?v=-C-JoyNuQJs">https://www.youtube.com/watch?v=-C-JoyNuQJs</a>（JSON 的发现者亲自讲述 JSON 的历史。强烈推荐大家看看，它比任何一部漫威电影都精彩）</p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f" rel="nofollow">https://medium.com/@nettsundere/the-peculiarities-of-json-165cca38231f</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"><span class="nav-label">← 更早</span><span class="nav-title">谈谈在参与的项目里“推销想法”来推动改变</span></a>
+  <a class="next" href="19-10-2021-the-peculiarities-of-the-yaml.html"><span class="nav-label">更新 →</span><span class="nav-title">YAML 的怪癖</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>YAML 的怪癖 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="接着 JSON 那篇往下聊：名字、历史、火星，以及表示“是”和“否”的多种写法。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="YAML 的怪癖">
+  <meta property="og:description" content="接着 JSON 那篇往下聊：名字、历史、火星，以及表示“是”和“否”的多种写法。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/19-10-2021-the-peculiarities-of-the-yaml.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="YAML 的怪癖">
+  <meta name="twitter:description" content="接着 JSON 那篇往下聊：名字、历史、火星，以及表示“是”和“否”的多种写法。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "YAML 的怪癖",
+    "datePublished": "2021-10-19",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/19-10-2021-the-peculiarities-of-the-yaml.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/19-10-2021-the-peculiarities-of-the-yaml.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/19-10-2021-the-peculiarities-of-the-yaml.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/19-10-2021-the-peculiarities-of-the-yaml.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-10-19">2021年10月19日</time></p>
+      <h1 class="post-title">YAML 的怪癖<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>这篇是<a href="01-10-2021-the-peculiarities-of-json.html">《JSON 的怪癖》</a>的续篇，我在那篇里分享了一些关于 JSON 的有趣内容。</p><p>这一篇讲 YAML，也就是 Yet Another Markup Language（又一种标记语言），可它并不是标记语言。</p><figure><img alt="" src="../../images/blog/9lm5bYLsRtuimaUfo_JAyA.jpeg" /><figcaption>照片：<a href="https://www.pexels.com/@francesco-ungaro?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Francesco Ungaro</a>，来自 <a href="https://www.pexels.com/photo/reindeer-eating-in-winter-forest-during-snowfall-3868813/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><h4>名字</h4><p>它起初（见 <a href="https://yaml.org/spec/history/2001-08-01.html">https://yaml.org/spec/history/2001-08-01.html</a>）叫“Yet Another Markup Language”，后来改名为“YAML Ain’t Markup Language”（YAML 不是标记语言）</p><h4>诞生</h4><p>尽管有些企业级开发者（我遇到过的那些）至今仍以为 YAML 是一项新技术，它的历史其实早在 2004 年就开始了，这让它最多比 JSON 被正式发现的日期早 4 年。</p><h4>火星任务</h4><p>据 GitHub 介绍，NASA 在火星 2020 直升机任务中用到了 YAML。</p><h4>YAML 曾经几乎是 JSON 的超集，后来成了严格意义上的超集（2009 年，YAML 1.2）</h4><p>不过，根据 <a href="https://yaml.org/spec/1.2.2/#12-yaml-history">https://yaml.org/spec/1.2.2/#12-yaml-history</a> 里的历史记载，这起初纯属巧合。</p><h4>YAML 的目标</h4><p>在 <a href="https://yaml.org/spec/1.2.2/#11-goals">https://yaml.org/spec/1.2.2/#11-goals</a> 列出的 YAML 目标里，你找不到“易于编写”这一条——人类可读性却是第 1 优先级。我也说不清为什么，但我觉得这件事很好笑。</p><h4>能力越大，电费越高</h4><p>YAML 很强大，用的时候得小心，因为在某些情况下它可能被坏人利用 <a href="https://tenderlovemaking.com/2013/02/06/yaml-f7u12.html">https://tenderlovemaking.com/2013/02/06/yaml-f7u12.html</a>（早在 2013 年，对 YAML 的热爱和不安全的解析器就都受到了挑战）</p><h4>表示“是”和“否”的写法有很多</h4><p>在 YAML 里，表示“是”和“否”的写法有很多：y|Y|yes|Yes|YES|n|N|no|No|NO<br>|true|True|TRUE|false|False|FALSE<br>|on|On|ON|off|Off|OFF（<a href="https://yaml.org/type/bool.html">https://yaml.org/type/bool.html</a>）。挪威人比谁都更清楚这一点，因为 <strong>no</strong> 也是一个常用来表示挪威语的代码。<a href="https://noyaml.com">https://noyaml.com</a> 上还列出了许多其他有趣的例子。</p><h4>但我们依然爱它</h4><h3>链接</h3><p><a href="https://yaml.org">https://yaml.org</a>——YAML 的官方网站</p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4" rel="nofollow">https://medium.com/@nettsundere/the-peculiarities-of-the-yaml-85b2e19ebcd4</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="01-10-2021-the-peculiarities-of-json.html"><span class="nav-label">← 更早</span><span class="nav-title">JSON 的怪癖</span></a>
+  <a class="next" href="25-11-2021-on-how-to-measure-the-developer-productivity.html"><span class="nav-label">更新 →</span><span class="nav-title">如何衡量开发者的生产力</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

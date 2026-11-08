@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>A couple of fonts &#8594; Vladimir Kiselev</title>
   <meta name="description" content="I have created a couple of fonts: Lords, Lords Connected and Neftyanochka. Latest releases, free to use for anything, under the SIL Open Font License.">
   <link rel="icon" type="image/png" href="../favicon@v2.png">
   <link rel="canonical" href="https://vladimir-kiselev.me/blog/10-10-2026-a-couple-of-fonts.html">
   <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/10-10-2026-a-couple-of-fonts.html">
   <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/10-10-2026-a-couple-of-fonts.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/10-10-2026-a-couple-of-fonts.html">
   <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/10-10-2026-a-couple-of-fonts.html">
   <meta name="robots" content="index,follow">
   <meta name="author" content="Vladimir Kiselev">
@@ -16,6 +19,7 @@
   <meta property="og:site_name" content="Vladimir Kiselev">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="A couple of fonts">
   <meta property="og:description" content="Lords, Lords Connected and Neftyanochka: latest releases, free to use for anything.">
   <meta property="og:url" content="https://vladimir-kiselev.me/blog/10-10-2026-a-couple-of-fonts.html">
@@ -42,7 +46,7 @@
   </script>
   <link rel="preload" href="../fonts/lords/Lords-Regular.ttf?v=19" as="font" type="font/ttf">
   <link rel="preload" href="../fonts/neftyanochka/Neftyanochka-Regular.ttf?v=13" as="font" type="font/ttf">
-  <link rel="stylesheet" href="../css/fonts-post.css">
+  <link rel="stylesheet" href="../css/fonts-post.css?v=2">
 </head>
 <body data-page="blog-post" data-lang="en">
 
@@ -55,7 +59,7 @@
     <a href="../blog.html" class="is-active" aria-current="page">Writing</a>
   </nav>
   <div class="lang">
-    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/10-10-2026-a-couple-of-fonts.html" lang="ru">RU</a>
+    <span class="is-active">EN</span><span class="sep">/</span><a href="../ru-ru/blog/10-10-2026-a-couple-of-fonts.html" lang="ru">RU</a><span class="sep">/</span><a href="../zh-cn/blog/10-10-2026-a-couple-of-fonts.html" lang="zh-CN">中文</a>
   </div>
 </header>
 
@@ -316,7 +320,7 @@
   <span>&copy; 2026 Vladimir Kiselev &middot; Saint Petersburg</span>
 </footer>
 
-<script src="../js/app.js@v=2.js" defer></script>
-<script src="../js/transitions.js@v=1.js" defer></script>
+<script src="../js/app.js@v=2.js?v=3" defer></script>
+<script src="../js/transitions.js@v=1.js?v=2" defer></script>
 </body>
 </html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>如何降级 NPM（node 包管理器）的版本 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="一则短笔记：怎样固定使用旧版 npm。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="如何降级 NPM（node 包管理器）的版本">
+  <meta property="og:description" content="一则短笔记：怎样固定使用旧版 npm。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/19-05-2018-how-to-downgrade-the-npm-version.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="如何降级 NPM（node 包管理器）的版本">
+  <meta name="twitter:description" content="一则短笔记：怎样固定使用旧版 npm。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "如何降级 NPM（node 包管理器）的版本",
+    "datePublished": "2018-05-19",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/19-05-2018-how-to-downgrade-the-npm-version.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/19-05-2018-how-to-downgrade-the-npm-version.html",
+    "isBasedOn": "https://medium.com/@nettsundere/how-to-downgrade-the-npm-node-package-manager-version-c9650af30ba6",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/19-05-2018-how-to-downgrade-the-npm-version.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/19-05-2018-how-to-downgrade-the-npm-version.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2018-05-19">2018年5月19日</time></p>
+      <h1 class="post-title">如何降级 NPM（node 包管理器）的版本<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>在控制台中输入：</p><p>npm install -g npm@3.10.10（本例中的版本是 3.10.10）</p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/how-to-downgrade-the-npm-node-package-manager-version-c9650af30ba6" rel="nofollow">https://medium.com/@nettsundere/how-to-downgrade-the-npm-node-package-manager-version-c9650af30ba6</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="11-04-2017-a-text-is-not-that-important.html"><span class="nav-label">← 更早</span><span class="nav-title">文字没那么重要</span></a>
+  <a class="next" href="12-02-2019-its-time-to-let-the-develop-branch-go.html"><span class="nav-label">更新 →</span><span class="nav-title">是时候放下 develop 分支了</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

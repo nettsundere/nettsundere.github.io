@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>减少“Changelog”的合并冲突 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="用目录结构消除 CHANGELOG 合并冲突的一种做法。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="减少“Changelog”的合并冲突">
+  <meta property="og:description" content="用目录结构消除 CHANGELOG 合并冲突的一种做法。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="减少“Changelog”的合并冲突">
+  <meta name="twitter:description" content="用目录结构消除 CHANGELOG 合并冲突的一种做法。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "减少“Changelog”的合并冲突",
+    "datePublished": "2015-06-08",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html",
+    "isBasedOn": "https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/08-06-2015-on-reducing-changelog-merge-conflicts.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/08-06-2015-on-reducing-changelog-merge-conflicts.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-06-08">2015年6月8日</time></p>
+      <h1 class="post-title">减少“Changelog”的合并冲突<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>为了减少 changelog 里的冲突，大家已经想过不少办法。可这些办法对我都不管用，只有一个新办法除外。</p><p><strong><em>tl;dr</em></strong><em> 用目录结构来救场：</em><a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p><ul><li>有些人用<strong>占位符</strong>。好主意。</li></ul><blockquote>“在 GitLab，我们是这样解决上面这个问题的：在 changelog 的顶部加上 100 行，每行只有一个连字符，用作占位符。” <a href="https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/"><em>https://about.gitlab.com/2015/02/10/gitlab-reduced-merge-conflicts-by-90-percent-with-changelog-placeholders/</em></a></blockquote><ul><li>有些人对单个文件使用<strong>不同的合并策略</strong>（merge=union）。如果 changelog 的每一行永远都独一无二，这个办法不错。可如果 changelog 里有些行的结尾不那么独特，这就是个坏主意了。到时候事情可能就这样出了错，而且谁都不会发现。解决冲突时，所有相似的行都可能被悄无声息地合并成一行。</li></ul><p>有时候，我光是修 CHANGELOG 的合并冲突就要花上好几个小时。没错。那我们就用一种叫<em>文件夹</em>的二维文件存储来解决它吧。</p><p>我们把一个功能和它的 changelog 条目（一个文件）对应起来，而这个条目属于某个版本（一个文件夹）。</p><figure><img alt="" src="../../images/blog/dmNlF5JdH9VAJUcLsBgopA.png" /></figure><p>现在，changelog 的这些改动就很好管理了。我们可以 revert 某个功能的提交，什么坏事都不会发生。我们可以往同一个 branch 里再加几个功能，完全不会有冲突。changelog 条目想写多复杂都可以。</p><p>现在，你不必再为了不打乱同事的改动，把被编辑器设置删掉的空格一个个补回去了。大家也可以开开心心的，不用每次你又接受一个 pull request 时都去 rebase。</p><figure><img alt="" src="../../images/blog/JdlwBWcle9TciPe6IgFrHQ.png" /><figcaption>现在，一个功能的改动在 diff 里就是这个样子。你只会看到有意义的改动。</figcaption></figure><h3>所需软件</h3><p>其实，用这套做法并不需要任何软件。不过，如果能一次看到整个 changelog 或者某个版本的全部内容，会更方便。所以我决定做一个项目，叫“Cyberlog”。</p><figure><img alt="" src="../../images/blog/gvwWxsBzOy6ksr4A_qlTLw.png" /><figcaption>Cyberlog 的帮助界面</figcaption></figure><p>目前它的功能还很有限。你可以操作条目和版本，可以查看某个版本或某个条目的改动，也可以查看全部改动。</p><h3>接下来要做的</h3><ul><li>用模板引擎进行定制（给潮人准备的集成）</li><li>SCM 集成（git-blame 等）</li><li>转换功能（可以把旧的 CHANGELOG 转换成 Cyberlog 支持的新格式）</li><li>多种呈现方式（说不定你需要 pdf？）</li></ul><h3>不打算做的</h3><ul><li>编辑条目的功能。编辑日志时，你<em>应该用</em>自己喜欢的文本？编辑器。就连 photoshop 看起来都够用了。我能想象一份 changelog 里满是有意义的图片、视频和音频，用来解释各项改动。</li></ul><p>项目源代码（BSD3）在这里：<a href="https://github.com/nettsundere/cyberlog">https://github.com/nettsundere/cyberlog</a></p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b" rel="nofollow">https://medium.com/@nettsundere/on-reducing-changelog-merge-conflicts-1eb23552630b</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <span></span>
+  <a class="next" href="25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"><span class="nav-label">更新 →</span><span class="nav-title">浮点类型的 Min 和 Max 运算是怎么实现的</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

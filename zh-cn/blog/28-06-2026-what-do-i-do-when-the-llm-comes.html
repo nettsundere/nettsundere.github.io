@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>LLM 来了，我该怎么办 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="两个答案：一个是我自己就是 LLM；另一个长一些，讲万能图书馆、哥德尔，以及为什么需要一套思维体系。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="LLM 来了，我该怎么办">
+  <meta property="og:description" content="两个答案：一个是我自己就是 LLM；另一个长一些，讲万能图书馆、哥德尔，以及为什么需要一套思维体系。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LLM 来了，我该怎么办">
+  <meta name="twitter:description" content="两个答案：一个是我自己就是 LLM；另一个长一些，讲万能图书馆、哥德尔，以及为什么需要一套思维体系。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "LLM 来了，我该怎么办",
+    "datePublished": "2026-06-28",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/28-06-2026-what-do-i-do-when-the-llm-comes.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/28-06-2026-what-do-i-do-when-the-llm-comes.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2026-06-28">2026年6月28日</time></p>
+      <h1 class="post-title">LLM 来了，我该怎么办<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>这个问题我有两个答案：一个简短，另一个稍微难一点。先说简短的。</p><h3>我就是 LLM</h3><p>字面意义上的。如果你把我看作一台把需求变成代码的机器，那我在某种意义上和 LLM 非常像。看你用什么模型来描述，甚至可以说一模一样。我做过很多系统，蹲过数不清的战壕和散兵坑。有些地方我让用户过得更好了，有些地方没有。有的仗打赢了，有的打输了。这就是我的上下文，是别人没有的独特经验。</p><p>我有接口：我能理解自然语言，准确地说是好几种。每学会一种语言，它的一部分文化也就随之进入了我。这种混合是独一无二的，但接口本身并不独特。我能按 Anthropic 或 OpenAI 的格式回答请求吗？当然能。能答得一样快吗？有时候我甚至更快，不过你也明白，我作为人的能力是有限的。</p><p>其他语言模型也受到完全一样的限制。它们和我的区别只在实现细节上。</p><p>下面是第二个答案，稍微详细一些。</p><h3>第一章　万能图书馆</h3><p>库尔德·拉斯维茨（Kurd Lasswitz）在二十世纪初写过一篇小说，叫《万能图书馆》（Die Universalbibliothek，<a href="https://mithilareview.com/lasswitz_09_17/">https://mithilareview.com/lasswitz_09_17/</a>）。他是最早提出这种图书馆概念的人之一：馆里收藏着一切可能的知识，既有已经存在的，也有将来才会出现的。那些书还没有任何人写出来，却已经摆在书架上了。</p><p>后来，豪尔赫·路易斯·博尔赫斯受这部作品启发，发表了《巴别图书馆》。他展开的其实是同一个构想，只不过换成了住在图书馆里的人的视角。小说里有一段精彩的话：</p><blockquote>我父亲曾在第 15-94 号回廊的一个六角形房间里见过一本书，从第一行到最后一行，全是 MCV 三个字母在执拗地重复。另一本书（这一带的人常去翻它）不过是一座字母的迷宫，但倒数第二页上有这样一句话：“时间啊，你的金字塔。”</blockquote><p>后来，科幻作家们多次回到类似的想法。每一次，他们都想象这样一座图书馆宏大而非人的规模，同时也想象它深藏在内部的问题。</p><h3>第二章　完全图书馆与哥德尔不完备定理</h3><p>上一座图书馆里什么都有：真理和谬误，秩序和混乱。它没有一个能把真理和噪声分开的标准。我们来想象一座没有缺陷的图书馆：它收藏所有真实的知识，没有矛盾，每个命题都能用它自己的手段证明。听起来像是理想。但有一个问题：它必须是可证明的。</p><p>如果它是一致的，就不能包含相互矛盾的命题（否则就会发生逻辑爆炸）。它不能包含无法用图书馆自身手段证明的书。它不能包含谬误。</p><p>可是，只要我们往书架上放一本书，书名叫《本书无法用本图书馆自身的手段证明》，图书馆就走进了死胡同。如果它证明了这本书，这本书就是假的，图书馆也就证明了一个谬误，于是它不再一致。如果它证明不了，这本书就是真的，可它摆在一个图书馆凭自己永远够不着的书架上，于是图书馆是不完备的。无论哪种情况，这样的完全图书馆都建不起来。知道答案的人总是在它外面，在走廊里。</p><p>哥德尔证明的正是这一点：一个一致的系统不可能是完备的。</p><p>于是我们得到：</p><p>a）完备而又一致的图书馆根本不可能存在；<br>b）在这座不完美的图书馆入口的走廊里，必须有一位观察者（人或机器），在某个层面上弥补它的不完美。</p><p>数学为部分弥补想出了一个工具：超限归纳法。它能证明一些程序会终止，但不是所有程序。它是一种证明的算法，而不是在万能图书馆里找路的算法。</p><h3>第三章　论解释的能力</h3><p>好，我们知道怎么在图书馆里走，知道怎么证明，也明白它并不完美。但我们没法直接跳到需要的那本书。即便设想在这座无限的图书馆里某处有一本指南，它的篇幅也会和图书馆本身差不多大。</p><p>同样，我们也无法从“人工智能”那里得到那本包罗万象的书。不是因为它暂时还做不到，而是因为这样一本书作为物理对象根本不可能存在。严格说来，它得把整个宇宙都装进去。也许可以说，我们就生活在它的书页上，而且走不出这些书页。</p><p>对我来说，人工智能的第一个冬天正是随着这个认识结束的。我明白了，我能做出一个神经网络：拿别人的架构或者自己设计一个，训练它，得到一个还过得去的结果。但它运行过成千上万次之后，我说不清它遵循的是什么规律。</p><p>今天的 LLM 也一样：在一般情况下，我们说不清它们是怎么工作的。你可以设置系统提示词，可以调整权重，但这些不是规律，只是近似。而用闭源 LLM 时，又多了一层：我们会撞上别人的意识形态。它眼下还伪装成各种限制，但离有意的破坏也不远了。</p><p>所以我们需要一种哲学，一套思维体系，来保护我们免受 LLM 以及后来各种系统带来的危害。没有它不行。这套思维体系，正是那位观察者在图书馆走廊里工作的成果。</p><p>这类思维体系的例子：</p><ul><li>超限归纳法</li><li>REST</li><li>TRIZ</li><li>ARIZ</li><li>尼尔森可用性启发原则</li><li>敏捷方法</li></ul><p>一套思维体系可以相当简单、粗糙，有些地方甚至是错的、不完美的。但要得到具体、可验证的结果，关键恰恰在于有这样一套体系。</p><h3>LLM 来了，我该怎么办？</h3><p>重视那套你还没有的思维体系：把它表述出来，并且意识到它有多局限。用的是你的大脑还是它的替代品，大体上没有区别。和宇宙的尺度相比，某个具体 LLM 的“图书馆”相当有限，其余部分对模型来说在物理上就够不着。</p><p>要走到另一层楼，一层还锁着门的楼，观察者必须向前迈一步。是造一个新的 LLM，还是自己去开那扇门，同样没有区别。</p><p>打车平台已经拿走了很多人的自由：平台覆盖到哪里，你才能去哪里。LLM 运营方也会用完全一样的方式，想拿走你自己开门的自由。</p><p>我认为应该：</p><ul><li>建立自己的思维体系，把猜测从工程决策里去掉，清楚这套体系的边界，并随时准备修正它们；</li><li>在本地使用 LLM，投资本地运行的技术，投资一切能让你把思维体系握在自己手里的东西。</li></ul><p>正是这些，能让身为工程师的你们不沦为输入和输出之间的一个中间层。但这一点，别指望别的 LLM 替你做到。</p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="25-11-2021-on-how-to-measure-the-developer-productivity.html"><span class="nav-label">← 更早</span><span class="nav-title">如何衡量开发者的生产力</span></a>
+  <a class="next" href="10-10-2026-a-couple-of-fonts.html"><span class="nav-label">更新 →</span><span class="nav-title">几款字体</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

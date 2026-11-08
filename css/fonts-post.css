@@ -8,14 +8,21 @@
 @font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Regular.ttf?v=13") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Bold.ttf?v=13") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Neftyanochka"; src: url("../fonts/neftyanochka/Neftyanochka-Italic.ttf?v=13") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+/* Sea of Love, the site's own font, sets this page's text in every language,
+   as on the rest of the site. The same files and cache key as app.css. The
+   specimens below keep the fonts that they show. */
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=27") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=27") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=27") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=27") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
 
 :root {
   --ink: #16130f;
   --paper: #f6f3ec;
   --muted: #6b645a;
   --line: rgba(22, 19, 15, 0.16);
-  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "PT Serif", Georgia, serif;
-  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --serif: "Sea of Love", serif;
+  --mono: "Sea of Love", sans-serif;
   --pad: clamp(1rem, 4vw, 3.5rem);
   --measure: 40rem;
 
@@ -479,3 +486,19 @@ html:lang(ru) .lig-row .off::before { content: "выкл. "; }
 /* Lords Connected: the "off" comparison waits for the rebuilt font, where
    plain letters stay on the line with contextual forms off */
 /* restored with the fixed font (2026-10-10): plain letters stay on the line */
+
+/* ---- the Chinese page ---- */
+/* Tracking spreads Han apart and reads as gaps between words; Han is set solid. */
+:is(.fp-top nav, .fp-top .lang .is-active, .fp-date, .fp-index .n, .fp-hero .post-title,
+    .font-no, .font-what, .try, .sets .lbl, .ligs .lbl, .font-text h3, .bigword figcaption,
+    .prose h2, .prose h3, .langs thead th, .bt-head h2, .bt-row .lbl):lang(zh) { letter-spacing: 0; }
+html:lang(zh) .lig-row .off::before { content: "关闭 "; letter-spacing: 0; }
+/* Chinese punctuation is full width and carries its own space, so it stays inside the column. */
+.prose :lang(zh) { hanging-punctuation: none; }
+/* Chinese has no italic: a slanted Han glyph is a distortion, not emphasis. */
+:is(i, em, cite):lang(zh) { font-style: normal; }
+/* 12 px is the smallest size at which Han strokes stay apart on a plain screen. */
+:is(.sets .lbl, .ligs .lbl, .langs thead th):lang(zh), html:lang(zh) .lig-row .off::before { font-size: 0.75rem; }
+/* A narrow cell or a large heading breaks between words, not inside 鞑靼 or 蒙古:
+   the language names break after 、, the heading at its <wbr>. */
+:is(.langs tbody th, .bt-head h2):lang(zh) { word-break: keep-all; overflow-wrap: anywhere; }

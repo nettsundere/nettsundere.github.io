@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Vladimir Kiselev &#8594; software engineer &#8942; architect</title>
   <meta name="description" content="Vladimir Kiselev — software engineer and architect based in Saint Petersburg.">
   <link rel="icon" type="image/png" href="favicon@v2.png">
   <link rel="canonical" href="https://vladimir-kiselev.me/">
   <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/">
   <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/">
   <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/">
   <meta name="robots" content="index,follow">
   <meta name="author" content="Vladimir Kiselev">
@@ -16,6 +19,7 @@
   <meta property="og:site_name" content="Vladimir Kiselev">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:locale:alternate" content="zh_CN">
   <meta property="og:title" content="Vladimir Kiselev — software engineer &amp; architect">
   <meta property="og:description" content="Vladimir Kiselev — software engineer and architect based in Saint Petersburg. Designs and builds systems that hold up under load and long service.">
   <meta property="og:url" content="https://vladimir-kiselev.me/">
@@ -69,7 +73,7 @@
     ]
   }
   </script>
-  <link rel="stylesheet" href="css/app.css@v=1.css">
+  <link rel="stylesheet" href="css/app.css@v=1.css?v=4">
   <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
 <body data-page="home" data-lang="en">
@@ -79,19 +83,19 @@
   <a class="mark" href="index.html">VK<span class="dot">.</span></a>
   <a class="role label ink" href="index.html">Software engineer &#8942; architect</a>
   <nav aria-label="Primary">
-    <a href="index.html" class="magnetic is-active">Index</a>
-    <a href="resume.html" class="magnetic">R&eacute;sum&eacute;</a>
-    <a href="contact.html" class="magnetic">Contact</a>
-    <a href="blog.html" class="magnetic">Writing</a>
+    <a href="index.html" class="is-active" aria-current="page">Index</a>
+    <a href="resume.html">R&eacute;sum&eacute;</a>
+    <a href="contact.html">Contact</a>
+    <a href="blog.html">Writing</a>
   </nav>
   <div class="lang">
-    <span class="is-active">EN</span><span class="sep">/</span><a href="ru-ru/index.html">RU</a>
+    <span class="is-active">EN</span><span class="sep" aria-hidden="true">/</span><a href="ru-ru/index.html">RU</a><span class="sep" aria-hidden="true">/</span><a href="zh-cn/index.html" lang="zh-CN">中文</a>
   </div>
 </header>
 
 <main>
   <section class="grid hero">
-    <span class="gutter-label label">Vladimir Kiselev &#8942; Index &mdash; 01</span>
+    <span class="gutter-label label">Vladimir Kiselev &#8942; Index &mdash; <span class="number">01</span></span>
 
     <div class="headline">
       <h1 class="display">Hello<span class="dot">.</span></h1>
@@ -116,7 +120,7 @@
         Architecture &mdash; its <em>social</em> side. The part where people design together, reconcile constraints out loud, and arrive at systems nobody would have drawn alone.
       </p>
       <p>
-        Day-to-day I write in JavaScript and TypeScript (not just at the edges), .NET (C#, F#), Python, Java, and SQL.
+        Day-to-day I write in JavaScript and TypeScript, .NET (C#, F#), Python, Java, and SQL.
       </p>
       <p>
         I care about social software architecture, Agile architecture, software internationalization, TRIZ, and ARIZ.
@@ -128,7 +132,7 @@
     <div class="kicker"><span class="label red">&#167; 03 &mdash; Elsewhere</span></div>
     <div class="body">
       <p>
-        Read my <a class="magnetic" href="blog.html">writing</a>, or get in touch via <a class="magnetic" href="contact.html">contact</a>.
+        Read my <a href="blog.html">writing</a>, or get in touch via <a href="contact.html">contact</a>.
       </p>
     </div>
   </section>
@@ -139,7 +143,7 @@
   <span class="label right">Saint Petersburg &middot; RU</span>
 </footer>
 
-<script src="js/app.js@v=2.js" defer></script>
-<script src="js/transitions.js@v=1.js" defer></script>
+<script src="js/app.js@v=2.js?v=3" defer></script>
+<script src="js/transitions.js@v=1.js?v=2" defer></script>
 </body>
 </html>

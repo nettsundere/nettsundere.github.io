@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>文字没那么重要 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="一个 Chrome 扩展，像广告拦截器屏蔽广告那样屏蔽文字。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/11-04-2017-a-text-is-not-that-important.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/11-04-2017-a-text-is-not-that-important.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/11-04-2017-a-text-is-not-that-important.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/11-04-2017-a-text-is-not-that-important.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="文字没那么重要">
+  <meta property="og:description" content="一个 Chrome 扩展，像广告拦截器屏蔽广告那样屏蔽文字。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/11-04-2017-a-text-is-not-that-important.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="文字没那么重要">
+  <meta name="twitter:description" content="一个 Chrome 扩展，像广告拦截器屏蔽广告那样屏蔽文字。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "文字没那么重要",
+    "datePublished": "2017-04-11",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/11-04-2017-a-text-is-not-that-important.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/11-04-2017-a-text-is-not-that-important.html",
+    "isBasedOn": "https://medium.com/@nettsundere/a-text-is-not-that-important-b586eb0e6087",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/11-04-2017-a-text-is-not-that-important.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/11-04-2017-a-text-is-not-that-important.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2017-04-11">2017年4月11日</time></p>
+      <h1 class="post-title">文字没那么重要<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../../images/blog/iM9P405newuSdITmSlTWLA.png" /></figure><p>大多数人每天都在用广告拦截扩展。还有人会选择禁用图片、flash、java 之类的东西，唯独文字没法禁用。所以我决定让这件事成为可能，至少在 <em>Chrome</em> 里。（upd：<a href="https://www.newrafael.com/">Rafaël Rozendaal</a> 和 <a href="https://jonaslund.biz/">Jonas Lund</a> 早在 2013 年就做到了，见<em>文末的更新</em>）</p><p>你猜怎么着？我还挺喜欢的。原来文字已经没那么重要了（嗯，直到你打开 <em>Reddit</em> 为止）。</p><p>它本可以是个艺术项目，但其实相当实用。我喜欢 YouTube 去掉这些文字之后变得更好的样子，猫咪的图片也很不错。</p><p>我做了一个扩展，源代码在这里：<a href="https://github.com/nettsundere/TextBlock">https://github.com/nettsundere/TextBlock</a></p><p>可以在 Chrome 网上应用店下载：<a href="https://chrome.google.com/webstore/detail/textblock/cbjhcabimjmeokngojdenfdpiccgekmd">https://chrome.google.com/webstore/detail/textblock/cbjhcabimjmeokngojdenfdpiccgekmd</a></p><figure><img alt="" src="../../images/blog/Ef2IBPGrft3h52F3mdag_w.png" /><figcaption>一个字都没有的维基百科</figcaption></figure><p><strong>UPD </strong><a href="https://www.newrafael.com/">Rafaël Rozendaal</a> 和 <a href="https://jonaslund.biz/">Jonas Lund</a> 早在 2013 年就做过一个类似的应用</p><p>今天（2017 年 4 月 17 日）我发现，类似的扩展早就有了。它叫 Text Free browsing，免费，可以在应用店的这个页面下载：<a href="https://chrome.google.com/webstore/detail/text-free-browsing/ioglfbphilinnhdmfbmfljmhemegfcdg/">https://chrome.google.com/webstore/detail/text-free-browsing/ioglfbphilinnhdmfbmfljmhemegfcdg/</a></p><p>项目介绍：<a href="https://www.newrafael.com/text-free-browsing/">http://www.newrafael.com/text-free-browsing/</a><br>我注意到的唯一功能差别是：TextBlock 会屏蔽动态添加的 iframe 里的文字，而 Text Free 这个浏览器扩展会让它们保持原样。</p><p>我完全不知道已经有人做过了。看来下次我得更认真地 Google 一下。</p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/a-text-is-not-that-important-b586eb0e6087" rel="nofollow">https://medium.com/@nettsundere/a-text-is-not-that-important-b586eb0e6087</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html"><span class="nav-label">← 更早</span><span class="nav-title">浮点类型的 Min 和 Max 运算是怎么实现的</span></a>
+  <a class="next" href="19-05-2018-how-to-downgrade-the-npm-version.html"><span class="nav-label">更新 →</span><span class="nav-title">如何降级 NPM（node 包管理器）的版本</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

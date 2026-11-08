@@ -40,7 +40,11 @@ const RELATED = {
 const LANGS = [
   { lang: 'en', base: '/blog', activeNav: 'Writing', back: 'All writing' },
   { lang: 'ru', base: '/ru-ru/blog', activeNav: 'Блог', back: 'Весь блог' },
+  { lang: 'zh-CN', base: '/zh-cn/blog', activeNav: '文章', back: '全部文章' },
 ];
+
+/** The language switcher's entry for each language, in its order. */
+const SWITCHER = { en: 'EN', ru: 'RU', 'zh-CN': '中文' };
 
 for (const L of LANGS) {
   test.describe(`writing index (${L.lang})`, () => {
@@ -58,6 +62,18 @@ for (const L of LANGS) {
         'href',
         new RegExp(`${SLUGS[0]}\\.html$`)
       );
+    });
+
+    test('every row opens a post that exists', async ({ page }) => {
+      await page.goto(`${L.base}.html`);
+      for (const row of await page.locator('.post-list .post-row').all()) {
+        const href = await row.getAttribute('href');
+        const slug = href.split('/').pop().replace(/\.html$/, '');
+        // every language has its own copy of every post
+        expect(new URL(href, page.url()).pathname).toBe(`${L.base}/${slug}.html`);
+        const res = await page.request.get(new URL(href, page.url()).href);
+        expect(res.status(), href).toBe(200);
+      }
     });
   });
 
@@ -116,6 +132,17 @@ for (const L of LANGS) {
           await expect(related).toHaveCount(0);
         }
 
+        // the language switcher leads to this post in the other languages
+        // the fonts post has a header of its own, so find the switcher by its role
+        const lang = page.locator('header .lang');
+        await expect(lang.locator(':scope > a, :scope > .is-active')).toHaveText(Object.values(SWITCHER));
+        await expect(lang.locator('.is-active')).toHaveText(SWITCHER[L.lang]);
+        for (const other of LANGS.filter((x) => x !== L)) {
+          const a = lang.locator('a', { hasText: SWITCHER[other.lang] });
+          const target = new URL(await a.getAttribute('href'), page.url());
+          expect(target.pathname, `${SWITCHER[other.lang]} link`).toBe(`${other.base}/${slug}.html`);
+        }
+
         // back to the index
         await expect(page.locator('.back-link', { hasText: L.back })).toBeVisible();
 
@@ -136,6 +163,54 @@ for (const L of LANGS) {
         // and load (turbo nav, so wait on the URL rather than a full load)
         await related.click();
         await page.waitForURL(new RegExp(`${L.base}/${to}\\.html$`));
+        await expect(page.locator('h1.post-title')).toBeVisible();
+      });
+    }
+  });
+}
+
+/**
+ * A reader who opens a post stays in their language. Every link to a post,
+ * on every page of a language (the index, the home page, other posts' older,
+ * newer and "See also" links), leads to that language's copy. Only the
+ * language switcher leads elsewhere.
+ */
+const TREES = {
+  en: { home: '/index.html', pages: ['/index.html', '/resume.html', '/contact.html', '/blog.html'] },
+  ru: { home: '/ru-ru/index.html', pages: ['/ru-ru/index.html', '/ru-ru/rezyume.html', '/ru-ru/kontakty.html', '/ru-ru/blog.html'] },
+  'zh-CN': { home: '/zh-cn/index.html', pages: ['/zh-cn/index.html', '/zh-cn/resume.html', '/zh-cn/contact.html', '/zh-cn/blog.html'] },
+};
+const POST_PATH = /^\/(?:ru-ru\/|zh-cn\/)?blog\/([^/]+)\.html$/;
+
+for (const L of LANGS) {
+  test.describe(`opening a post keeps the language (${L.lang})`, () => {
+    const pages = [...TREES[L.lang].pages, ...SLUGS.map((s) => `${L.base}/${s}.html`)];
+
+    test('every link to a post stays in this language', async ({ page }) => {
+      const strays = [];
+      for (const path of pages) {
+        await page.goto(path);
+        const links = await page.evaluate(() =>
+          [...document.querySelectorAll('a[href]')]
+            .filter((a) => !a.closest('header .lang'))
+            .map((a) => new URL(a.getAttribute('href'), location.href))
+            .filter((u) => u.origin === location.origin)
+            .map((u) => u.pathname)
+        );
+        for (const p of links) {
+          const m = p.match(POST_PATH);
+          if (m && p !== `${L.base}/${m[1]}.html`) strays.push(`${path} -> ${p}`);
+        }
+      }
+      expect(strays, `links that leave ${L.lang}:\n${strays.join('\n')}`).toEqual([]);
+    });
+
+    for (const slug of SLUGS) {
+      test(`clicking ${slug} in the index opens it in ${L.lang}`, async ({ page }) => {
+        await page.goto(`${L.base}.html`);
+        await page.locator(`.post-list .post-row[href$="${slug}.html"]`).click();
+        await page.waitForURL(new RegExp(`${L.base}/${slug}\\.html$`));
+        await expect(page.locator('html')).toHaveAttribute('lang', L.lang);
         await expect(page.locator('h1.post-title')).toBeVisible();
       });
     }

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>如何衡量开发者的生产力 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="把生产力看作一个不完美模型的属性：要衡量团队，而不是单个开发者。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="如何衡量开发者的生产力">
+  <meta property="og:description" content="把生产力看作一个不完美模型的属性：要衡量团队，而不是单个开发者。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="如何衡量开发者的生产力">
+  <meta name="twitter:description" content="把生产力看作一个不完美模型的属性：要衡量团队，而不是单个开发者。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "如何衡量开发者的生产力",
+    "datePublished": "2021-11-25",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html",
+    "isBasedOn": "https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/25-11-2021-on-how-to-measure-the-developer-productivity.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/25-11-2021-on-how-to-measure-the-developer-productivity.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2021-11-25">2021年11月25日</time></p>
+      <h1 class="post-title">如何衡量开发者的生产力<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../../images/blog/F0Mq9sOj9FUVMvDqopaOGA.jpeg" /><figcaption>照片：<a href="https://www.pexels.com/@psad?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">David Yu</a>，来自 <a href="https://www.pexels.com/photo/three-wall-arts-indoors-1582547/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><p>前几天我在听 Microsoft Research 的一期播客（New Future of Work: How developer collaboration and productivity are changing in a hybrid work model，<a href="https://www.microsoft.com/en-us/research/podcast/new-future-of-work-how-developer-collaboration-and-productivity-are-changing-in-a-hybrid-work-model/">https://www.microsoft.com/en-us/research/podcast/new-future-of-work-how-developer-collaboration-and-productivity-are-changing-in-a-hybrid-work-model/</a>）。</p><p><strong>说明：</strong>这期播客本身就很有意思。我的评论完全可以跳过，它只是基于我自己的观察。</p><p>播客里谈到的一个话题是开发者的生产力，我想就这一点分享一些想法。</p><h3>模型</h3><p>如果把一个指标看作某个不完美模型的属性，评估它就容易多了：它是某个维度上的一个值，代表模型的一种特质。</p><p>我们来看一个模型和它的属性的例子。</p><p><em>一架飞机离开了地面。你得解释为什么。</em></p><ul><li>物理学家大概会建一个模型，用牛顿定律、伯努利原理、翼型（帮飞机升起来的机翼形状）等来解释起飞。</li><li>经济学家大概只会说：因为把飞机从 A 地飞到 B 地划算。也许干脆用钱来衡量：把风险算进去之后，产出或潜在产出的价格高于投入。说白了，大家买了票，所以飞机会飞（我常拿这个开玩笑，来说明不同模型之间的区别）。</li><li>太空时代的工程师也许会说，只要发动机合适，又能改变推力的方向，就连奶奶的旧五斗柜都能飞得很好。</li><li>从化学出发的解释大概会关注燃料，也会涉及物理。</li></ul><p>我觉得这些解释都不错。它们只是用了不同的模型，也许能帮使用者发现一些值得修正的地方。但只凭片面的视角去修正什么是危险的，尤其是当模型本身只有寥寥几个可测量的属性时。模型越简单，能测量的属性越少，就越难确定改动被建模的那个东西不会酿成灾难。好例子是：想用代码解决一个物理问题，却无视基于物理的解决办法；或者只根据一个财务模型来决定给开发者配什么电脑。至少应该有反馈：一个更底层的模型，或者起码是人的反馈。</p><p>此外，当模型缺少足够多的可测量属性时，就有一种风险：搭起来的结构会努力交出好看的测量数据，而不是真正的产出。比如代码行数、修复的问题数、完成的拉取请求数。如果只盯着这些，理论上被测量的那群人大概会去适应它：写出更多行代码，制造更多要修的 bug，做更多不必要的改动，只为了捧走“效率奖杯”。</p><h3>上下文</h3><p>简单的数学告诉我们：<em>2 * 5 = 5 * 2</em>。但对人来说，结果会因上下文而大不相同。比如去买菜：你可以拎着 2 袋往返车上 5 次，也可以拎着 5 袋往返 2 次。</p><p>就算你只为一个司机单独建模，哪怕这位司机非常有天赋，上下文仍然很容易拉低其表现（例如，在一个司机们都开得不怎么样的地方，好司机也可能举步维艰）。</p><p>我的意思是，脱离上下文去测量是个好主意吗？我不这么认为。拉取请求的数量如果单独测量、只用一个数字来表达，并不是好指标。拉取请求之间“谁引出了谁”的关系图也许更好（一个改动可能让后面许多改动成为可能）。可即便如此，能公平地说，做不做影响深远的大改动只取决于开发者本人吗？就开发者的生产力而言，团队就是上下文，需求是团队的成果，所以很难说开发者的工作能简单地用一个数字来表达。</p><h3>投入与结果</h3><p>我认为，结果（产品、软件、各种属性等）不应该是唯一被测量的东西。似乎也有必要考虑投入，并同样去测量它。</p><p>举个例子：过去有段时间，我在 Teams 里同时进行着 5 个以上的对话。有一阵子，我甚至想提议做一个应用功能，让开发者更容易管理这条队列，还能让经理来决定怎样排优先级最好。我认为，由于短期工作记忆的弱点，人很难同时专注于太多事情（顺便说一句，黑猩猩在这方面比我们强）。</p><p class="post-embed"><a href="https://www.youtube.com/watch?v=zsXP8qeFF6A">在 YouTube 上观看 ↗</a></p><p>远程办公的时代，别人更难看到你此刻同时在进行多少个对话。我觉得，只要让别人能看到你的决策队列有多长，这个问题就能解决。这是个好的测量，但也许不是用来衡量开发者技能的，而是用来研究沟通关系图、从整体上简化流程的（例如，有向无环的沟通可能更快，“不用来回拉扯”）。</p><h3>总的来说</h3><p>我认为，更合理的是对团队建模和测量：看团队基于投入和上下文交付了什么（产出）。光是这一点，就有可能帮组织获得足够的反馈来改进。开发者的生产力可以通过其所在的团队来衡量。</p><p>如果有人非要画出一个与单个开发者生产力相关的数字，最后可能得到一个毫无意义的数，就像抽象的电脑性能指数。好吧，指数是 10，可真正的问题是：我能不能跑得动新出的增强版《上古卷轴》？</p><p>所以，我的答案是：如果你想更了解团队成员的生产力，并帮他们提高生产力，就去和他们聊聊。但不要脱离他们所在团队的上下文来使用这些数据。老派的一对一谈话会很有帮助，也许比基于产出的自动化还要有用。</p><p class="post-related">另见后来写的：<a href="28-06-2026-what-do-i-do-when-the-llm-comes.html">LLM 来了，我该怎么办</a>，进一步谈不完美的模型和思维体系。</p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a" rel="nofollow">https://medium.com/@nettsundere/on-how-to-measure-the-developers-productivity-b7df7d572d2a</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="19-10-2021-the-peculiarities-of-the-yaml.html"><span class="nav-label">← 更早</span><span class="nav-title">YAML 的怪癖</span></a>
+  <a class="next" href="28-06-2026-what-do-i-do-when-the-llm-comes.html"><span class="nav-label">更新 →</span><span class="nav-title">LLM 来了，我该怎么办</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>计算机安全的几种有趣思路 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="与其一味防守，不如迷惑和拖住攻击者：几种理论上的、合法的办法。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="计算机安全的几种有趣思路">
+  <meta property="og:description" content="与其一味防守，不如迷惑和拖住攻击者：几种理论上的、合法的办法。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/02-06-2019-funny-approaches-to-the-computer-security.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="计算机安全的几种有趣思路">
+  <meta name="twitter:description" content="与其一味防守，不如迷惑和拖住攻击者：几种理论上的、合法的办法。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "计算机安全的几种有趣思路",
+    "datePublished": "2019-06-02",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/02-06-2019-funny-approaches-to-the-computer-security.html",
+    "isBasedOn": "https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/02-06-2019-funny-approaches-to-the-computer-security.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/02-06-2019-funny-approaches-to-the-computer-security.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-06-02">2019年6月2日</time></p>
+      <h1 class="post-title">计算机安全的几种有趣思路<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p><em>计算机安全的几种有趣的理论思路</em></p><figure><img alt="" src="../../images/blog/cf8SVmWk8uUsDmh7ittwLQ.jpeg" /><figcaption>照片：<a href="https://www.pexels.com/@scottwebb?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Scott Webb</a>，来自 <a href="https://www.pexels.com/photo/equipment-pavement-security-security-camera-430208/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></figcaption></figure><p>前几天我在想，计算机安全有哪些有趣的理论思路。你知道，防御通常指的是一些被动的东西：密码、密钥、日志，有时还有“靠隐蔽求安全”（security through obscurity）、防火墙、各种防篡改手段等等。防御通常相当被动：你坐在那里等着，准备充分，随时准备抵御攻击者。但如果稍微换个做法，事情就有趣多了。免责声明：我们只讨论理论上的、守序善良（lawful-good）的做法。</p><p>设想以下几种场景：</p><ul><li>服务器假装攻击已经得手，然后反过来攻击对方。反击可以是钓鱼，骗取攻击者的密码（干脆客客气气地向对方要，或者冒充攻击者那边的 SUDO 提示符，然后也许再 SSH 回去）；也可以是迷惑攻击者，逼对方暴露真实 IP（打印一些根本不存在的错误码，让对方去 Google 搜索，再到一份假手册里读到相关说明）。再举个例子：真正的 SSH 用端口敲门（port knocking）的方法藏起来（见 <a href="https://en.wikipedia.org/wiki/Port_knocking">https://en.wikipedia.org/wiki/Port_knocking</a>），而在标准端口上响应的是一个假的 SSH 服务器。这个假服务器能做的事很多：给攻击者提供假信息，透露假的网络细节，还能提供假工具，用来做上面说过的所有这些事。</li><li>服务器反过来暴力破解对方，让对方难以暴力破解自己。回击时，服务器可以直接用对方暴力破解它时用的那些数据。</li><li>服务器向攻击者的客户端发起 DDOS 攻击，让对方难以连上自己。</li><li>服务器上装着定制的 VIM 脚本，让未经授权的人根本没法用 VIM，从而把对方搞糊涂（这事我亲身经历过，只不过我是有授权的：一位队友把自己的 VIM 脚本装到了服务器上，结果我完全没法用 VIM 了。我爱 VIM）</li><li>可以用机器人在空闲时段把服务器从网络上物理断开</li><li>空闲时段可以接上一台假服务器</li><li>服务器上一出现可疑操作，就可以触发机器人</li><li>可以用机器学习（准确地说，是训练）来识别攻击者（只凭对方在服务器上执行的那串终端命令）。然后照样可以让机器人把服务器物理断开。</li><li>好吧，也可以不用机器人，直接用防火墙或负载均衡器，但机器人更好玩</li><li>可以根据攻击者的网络特征来识别对方</li><li>服务器可以识别出由僵尸机发起的 DDOS，并尝试利用当初被用来劫持这些机器的类似漏洞，只不过目的不是劫持，而是发起一次“杀毒攻击”来治好<em>僵尸机</em>：在攻击服务器的僵尸机上部署并运行杀毒软件。为了让这一条留在善良的一边，我假定我们只治疗属于防御方的僵尸机/电脑。</li><li>服务器可以显示一条晦涩难懂的 SSH 消息来迷惑攻击者，比如假装自己是台冰箱什么的，还可以借此把攻击者引到网上专门准备好的 man 手册页之类的地方</li><li>服务器可以时不时地说，它知道你在干坏事，而且“组织”正在审查你。即使根本就没有什么“组织”。</li><li>服务器可以对攻击者撒谎，假装自己是台假服务器。撒谎没关系，尤其是在有人想抢你的时候。</li></ul><p>还有</p><ul><li>你还可以时不时地打印出 S̡̯̯̺̥̘̫͓̬̟͎͐͂ͥ̿̂̂͋ͭ̓͛̾ͭ̾̅̐ͨͥ͑͂̕C̶͈̳̪̱ͭ͋ͫͭ̀̆̈́̌̅̏̀A̶̎ͮ̐ͫ̃́̅̓̓͑̓̀͏̵̖̥͍̲̠̘̖Rͯ͑͑ͩ͏̢̠̜̜͖͕͚̞̗̘̼̬̣̀͜Y̵̩̱͙̪̲͍̣̖̹̘̲̬̬̭͌̂͗̉͛̈̀͜͞ ̴̸͚͎̯̞̼͇̯̝̣̪͙͑̒ͥͩͯ̈̔̄͋̕ͅṲ͕͍͕͎̘̭̜̲͉̆͑̉ͧ̈́ͥ̄̐ͪ̕͟͝ͅN̶̛̠̖͕̟̹͇̅͑ͮ̑̊͂̃ͦͯ͛ͧͪ̓͗ͪ̽͑͜͢͟Ḯ̴̸̷̶̢̺̼̦̹̩̪̩͚͉̘̬̘̗͍̘͎̮̞̲̐̒̆̀ͭ̾̿̒̓ͣ̉̚C̷̺̭̯̳͎͕͕̻̻̖̺̽̓̒̎̄̆̓̑̉̎̑̌̏͋̔̂ͭ͡O̢ͬͮͣ͋̑ͤ͆̚҉̹͎̱̘̤͔̲̜͔͍͚D̷̙̺̝̫̣̣̞̱͎̫̼͈͚̼ͤ̍̾̒ͣͤͮ͐ͧ̀̀ͥͬ̐́͡ͅḚ̶͙̬̥͙̙̼̥̪̦̤̠̮͐ͮ̎̒ͥ̕͟͡ ̢̢̛̬̫̣͍̇̀ͨ͒͗̔̓M͚̳̱̮̹ͭ̊̈̽̐̅̽̊̊̄̒̽͋̏̚̕͟Ȩ̡͈̬̤̖̜̲̣̠̤̪̣̭͓͈͊͋ͯ̿̋͒̌̏̎ͪ̿ͭ̊͑ͫ͋͡͡S̡̝̟͇͔̺̲͎̝̖͗ͧͦ̍͋̈̑͑̔̃̂̈́́̆̐͊̎̚͜͜͢͝ͅS͕̣̮͍̄͗̓̊͐́̈͐ͫͪ̓̈ͩ̂͆̕͠͠A͗ͩ̀ͥ͊̃̈́̓̀̄ͤ͒ͭ͑̊҉҉͔̭̟̹̯̼̪̱̥̱̪̻͔͍̬͡ͅG̴̡̛͌̋͆̑̓͋̈̿ͬ̌ͨ́ͩ̎҉̠̙̯̥̩̺̟̞̦͎̘̝̣̰ͅẺ̢́̇ͦ͂ͮ́͏͔͚̫̪̯̯̯̼̞̹̖͉̣S̶͈̹̝̦̭͙͖̘̭̥̳̩̟͙̮̩͕̍͋ͣͧͤ̚͟。</li></ul>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec" rel="nofollow">https://medium.com/@nettsundere/funny-approaches-to-the-computer-security-365d331ba2ec</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="12-02-2019-its-time-to-let-the-develop-branch-go.html"><span class="nav-label">← 更早</span><span class="nav-title">是时候放下 develop 分支了</span></a>
+  <a class="next" href="22-03-2020-on-selling-an-idea-to-change-something-in-a-project-you-are-working-on.html"><span class="nav-label">更新 →</span><span class="nav-title">谈谈在参与的项目里“推销想法”来推动改变</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>是时候放下 develop 分支了 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="当发布不由你掌控时，共用的 develop 分支为什么就不再有意义。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="是时候放下 develop 分支了">
+  <meta property="og:description" content="当发布不由你掌控时，共用的 develop 分支为什么就不再有意义。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="是时候放下 develop 分支了">
+  <meta name="twitter:description" content="当发布不由你掌控时，共用的 develop 分支为什么就不再有意义。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "是时候放下 develop 分支了",
+    "datePublished": "2019-02-12",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html",
+    "isBasedOn": "https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/12-02-2019-its-time-to-let-the-develop-branch-go.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/12-02-2019-its-time-to-let-the-develop-branch-go.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2019-02-12">2019年2月12日</time></p>
+      <h1 class="post-title">是时候放下 develop 分支了<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<figure><img alt="" src="../../images/blog/vE42P3i3w5oXnz5u7ezIBA.png" /></figure><p>如果你不是包揽全部开发工作的那个人，那就是时候放下 develop 分支了。</p><p>是全部的开发工作。</p><p>这种情况在公司里很常见：在企业级（如果你愿意这么叫的话）、多少带点 scrum 味道的环境里，决定发布里放进什么的人不是你。正是在这一点上，把开发分支当作未来版本的整个思路<em>完全说不通</em>。</p><p>设想一个典型的基于 scrum 的 Web 应用，你和团队的同事们在 [公司名称] 开发和维护它。任务在 Jira 里管理，你们用 Github for Enterprise，遵循 GitFlow 策略（这个策略很漂亮）。你们把代码 merge 进 Develop。</p><h4>问题是什么</h4><ul><li>你在一个 sprint 里做的东西，不一定都会进入发布</li><li>你做的东西，也不一定本来就打算在这次迭代中发布</li><li>即使代码是为下一次迭代准备的，你和队友们仍然会想把它 merge 进去</li></ul><h4>这会导致什么</h4><ul><li>到了发布日，你最后只能手动挑选要发布的内容，再手动打补丁。这样拼出来的代码版本，其实从没被开发新功能的开发者们测试过。这是一个谁也没见过的全新宇宙。</li><li>最糟的是：你可能不得不删掉一些东西。这样不仅造出了一个无法预测的宇宙，还可能在途中漏掉什么。漏掉的东西第二天就会在生产环境里冒出来，而且往往是在夜里。</li><li>Develop 分支的存在本身就会让人糊涂：有了它，你可以不去想手上这个功能的目标版本是哪个，也可以不去和你服务的业务方沟通（没错，有时候一个功能的目标版本确实说不清）。</li></ul><h3>怎么解决</h3><p><em>删掉 develop 分支</em>。放下它。</p><p>它只是一个“未来版本”的概念，你不该为它付出代价。</p><p>只保留 release 分支。让 pull request 指向 release 分支。只要你和团队觉得方便，随时可以把旧的 release 分支 merge 进新的。把这定成规矩：新版本一部署，就把代码 merge 进下一个 release 分支。目标版本不明确时，去问利益相关方。一旦某个功能的目标版本变了（比如它现在上线还太早），就马上 revert 它的代码，并确保利益相关方明白 rebase 一个功能的代价。</p><p>重新开始思考。release 分支永远保留。用 tag 来追踪每次发布。小改动就留在 release 分支里。放下 <strong>develop</strong> 分支（并确保 <strong>master</strong> 分支也跟它一起走）。</p><p>对你来说，根本不存在默认的 <strong>develop</strong> 分支这个概念？那你完全可以不要它。</p><p><em>你大概会开始考虑 feature flag，但我建议三思，因为它从来都不便宜。每一种功能状态，又是一个同样没被测试过的宇宙。</em></p>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9" rel="nofollow">https://medium.com/@nettsundere/its-time-to-let-the-develop-branch-go-f69243d546a9</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="19-05-2018-how-to-downgrade-the-npm-version.html"><span class="nav-label">← 更早</span><span class="nav-title">如何降级 NPM（node 包管理器）的版本</span></a>
+  <a class="next" href="02-06-2019-funny-approaches-to-the-computer-security.html"><span class="nav-label">更新 →</span><span class="nav-title">计算机安全的几种有趣思路</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

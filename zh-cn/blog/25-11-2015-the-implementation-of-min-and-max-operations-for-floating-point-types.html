@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-OuZY6WzJOIh2C89ThsUSxQtxIJomDP4jHuL8NXL3o5c='; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>浮点类型的 Min 和 Max 运算是怎么实现的 → 弗拉基米尔·基谢廖夫</title>
+  <meta name="description" content="一旦遇到 NaN、±0 和 ±Infinity，不同语言里的 Min/Max 为什么就各不相同。">
+  <link rel="icon" type="image/png" href="../../favicon@v2.png">
+  <link rel="canonical" href="https://vladimir-kiselev.me/zh-cn/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="en" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="ru" href="https://vladimir-kiselev.me/ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="zh" href="https://vladimir-kiselev.me/zh-cn/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <link rel="alternate" hreflang="x-default" href="https://vladimir-kiselev.me/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta name="robots" content="index,follow">
+  <meta name="author" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="弗拉基米尔·基谢廖夫">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="ru_RU">
+  <meta property="og:title" content="浮点类型的 Min 和 Max 运算是怎么实现的">
+  <meta property="og:description" content="一旦遇到 NaN、±0 和 ±Infinity，不同语言里的 Min/Max 为什么就各不相同。">
+  <meta property="og:url" content="https://vladimir-kiselev.me/zh-cn/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html">
+  <meta property="og:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="浮点类型的 Min 和 Max 运算是怎么实现的">
+  <meta name="twitter:description" content="一旦遇到 NaN、±0 和 ±Infinity，不同语言里的 Min/Max 为什么就各不相同。">
+  <meta name="twitter:image" content="https://vladimir-kiselev.me/images/profile.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "浮点类型的 Min 和 Max 运算是怎么实现的",
+    "datePublished": "2015-11-25",
+    "inLanguage": "zh-CN",
+    "url": "https://vladimir-kiselev.me/zh-cn/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "mainEntityOfPage": "https://vladimir-kiselev.me/zh-cn/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html",
+    "isBasedOn": "https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d",
+    "author": { "@type": "Person", "@id": "https://vladimir-kiselev.me/#person", "name": "弗拉基米尔·基谢廖夫" },
+    "publisher": { "@id": "https://vladimir-kiselev.me/#person" }
+  }
+  </script>
+  <link rel="stylesheet" href="../../css/app.css@v=1.css?v=4">
+  <link rel="stylesheet" href="../../css/blog.css?v=2">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+</head>
+<body data-page="blog-post" data-lang="zh">
+
+<header class="grid site-header">
+  <a class="mark" href="../index.html">VK<span class="dot">.</span></a>
+  <a class="role label ink" href="../index.html">软件工程师 ⋮ 架构师</a>
+  <nav aria-label="Primary">
+    <a href="../index.html">首页</a>
+    <a href="../resume.html">简历</a>
+    <a href="../contact.html">联系</a>
+    <a href="../blog.html" class="is-active" aria-current="page">文章</a>
+  </nav>
+  <div class="lang">
+    <a href="../../blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html" lang="en">EN</a><span class="sep" aria-hidden="true">/</span><a href="../../ru-ru/blog/25-11-2015-the-implementation-of-min-and-max-operations-for-floating-point-types.html" lang="ru">RU</a><span class="sep" aria-hidden="true">/</span><span class="is-active">中文</span>
+  </div>
+</header>
+
+<main>
+  <section class="grid hero post-hero">
+    <span class="gutter-label label">弗拉基米尔·基谢廖夫 ⋯ 文章</span>
+    <div class="headline">
+      <p class="label red post-date"><time datetime="2015-11-25">2015年11月25日</time></p>
+      <h1 class="post-title">浮点类型的 Min 和 Max 运算是怎么实现的<span class="dot">。</span></h1>
+    </div>
+    <hr class="rule-red">
+  </section>
+
+  <section class="grid section">
+    <div class="post-body measure-wide">
+<p>这是一个关于简单数学运算在不同软件实现之间存在差异的故事。这些运算回答的问题是：“两个浮点值里哪个更大”（或者更小）。</p><p>针对浮点数的 Min 和 Max 实现各不相同，而且在大多数情况下，它们的行为并不符合<br>IEEE-754–2008 标准（IEEE Standard for Binary Floating-Point Arithmetic）。</p><p>来看<em>下面这个例子</em>，它是 Max 的一个朴素的通用 JavaScript 实现：</p><pre>function Max(a, b) {<br>  if(a &gt; b) {<br>    return a; <br>  } else {<br>    return b; <br>  }<br>}</pre><p>这个实现在很多方面都不正确：</p><ul><li>它处理不了 -0 +0 的情况（+0 应该大于 -0）；</li><li>它没有按照 JavaScript 规范处理输入和参数个数（-Infinity / +Infinity 的情况）</li></ul><p>还有最有意思的一点：</p><ul><li>它无法正确处理 NaN 值（Not-a-Number）</li></ul><figure><img alt="" src="../../images/blog/7H4rs6k6g8M_5P_gxGZtPg.png" /><figcaption>我最喜欢的 NaN 来源：零除以零</figcaption></figure><p>那么，当 a 是 NaN、b 是 NaN，或者 a 和 b 都是 NaN 时，正确的处理方式是什么呢？只要用到浮点数，我们就能找到对 <strong>IEEE</strong> 标准的引用，接着就会找到 minNum 和 maxNum 这两个运算的定义，<br>它们<em>优先选择数值</em>，而不是 NaN 值，所以 <strong>Max(NaN, 数值) = Max(数值, NaN) = 数值</strong>。</p><p>但兼容 IEEE 的现代实现<strong>并不多</strong>。</p><h4>按 IEEE 754–2008 处理 NaN 的库，</h4><p><em>即 Max(NaN, 数值) = Max(数值, NaN) = 数值：</em><br>C 语言，自 C99 起 <a href="https://en.cppreference.com/w/c/numeric/math/fmax">http://en.cppreference.com/w/c/numeric/math/fmax</a></p><h4>不按 IEEE 754–2008 处理 NaN 的库，</h4><p><em>即 Max(NaN, 数值) = Max(数值, NaN) = NaN：</em></p><ul><li>ECMAScript，<br>规范见 <a href="https://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11">http://www.ecma-international.org/ecma-262/5.1/#sec-15.8.2.11</a>，V8 的实现见 <a href="https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77">https://github.com/v8/v8/blob/cd81dd6d740ff82a1abbc68615e8769bd467f91e/src/js/math.js#L77</a></li><li>.NET（C#、F# 以及其他使用 Math 模块的语言；在 F# 中是 max 运算符）<br><a href="https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381">https://github.com/dotnet/coreclr/blob/bc146608854d1db9cdbcc0b08029a87754e12b49/src/mscorlib/src/System/Math.cs#L381</a></li></ul><h4>参数为 NaN 时抛出异常的库，例如：</h4><ul><li>Ruby（Enumerable 上定义了 max/min 方法，但没有标准的 Max/Min 实现），<br>会抛出“comparison of Float with NaN failed”。可 NaN 的类仍然是 float。更早版本的 ruby 解释器可能会抛出“comparison of Float with Float failed”异常。</li></ul><h4>不满足交换律的行为</h4><p><em>即 Max(数值, NaN) 不等于 Max(NaN, 数值)</em></p><p>Swift、Haskell、OCaml</p><p>有变通的办法。</p><h4>结论</h4><p>看来在大多数情况下，我们都应该确保 Min/Max 函数的所有参数都不是 NaN，因为视 Min/Max 的具体实现而定，结果可能会被另一个参数污染。<br>IEEE 标准规定了标准行为，但在现代语言里，你多半会看到另一种行为。<br>为什么？</p><ul><li>似乎是因为除了异常，没有别的办法把错误的来源带进结果里。而异常被认为很慢；</li><li>工程师们写标准库时，会参照别的标准库的实现；</li><li>标准的 pdf 本身不是免费的。</li><li>“一个实现通吃所有情况”的通用写法看起来很诱人。</li><li>这是个边界情况，对开发者来说大多数时候并不重要。我们只要坐等问题找上门就行了。</li></ul><p>p.s. 还有 (± Infinity, NaN) 这个边界情况。</p><p>虽然标准里关于浮点运算的条目都能查到，但你最好还是先读一读 [你最喜欢的编程语言] 的语言规范。</p><figure><img alt="" src="../../images/blog/gm67zRlM5TC6p53Tofy-ZQ.png" /></figure>
+<p class="medium-note">原文发表于 Medium：<a href="https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d" rel="nofollow">https://medium.com/@nettsundere/the-implementation-of-min-and-max-operations-for-floating-point-types-80d3616c084d</a></p>
+    </div>
+  </section>
+
+  <nav class="post-nav grid" aria-label="文章导航">
+  <a class="prev" href="08-06-2015-on-reducing-changelog-merge-conflicts.html"><span class="nav-label">← 更早</span><span class="nav-title">减少“Changelog”的合并冲突</span></a>
+  <a class="next" href="11-04-2017-a-text-is-not-that-important.html"><span class="nav-label">更新 →</span><span class="nav-title">文字没那么重要</span></a>
+</nav>
+
+  <section class="grid back-section">
+    <div class="back-wrap"><a href="../blog.html" class="back-link">← 全部文章</a></div>
+  </section>
+</main>
+<footer class="grid site-footer">
+  <span class="label left">© 2026 弗拉基米尔·基谢廖夫</span>
+  <span class="label right">圣彼得堡 · RU</span>
+</footer>
+
+<script src="../../js/app.js@v=2.js?v=3" defer></script>
+<script src="../../js/transitions.js@v=1.js?v=2" defer></script>
+</body>
+</html>

@@ -72,4 +72,63 @@ test.describe('turbo navigation', () => {
     await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
     await expect(page.locator('h1.display')).toContainText('Привет');
   });
+
+  test('the language switch reaches the Chinese pages and back', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.lang a', { hasText: '中文' }).click();
+    await expect(page).toHaveURL(/\/zh-cn\/index\.html$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
+    await expect(page.locator('body')).toHaveAttribute('data-lang', 'zh');
+    await expect(page.locator('h1.display')).toContainText('你好');
+
+    // within the Chinese tree, nav links swap pages in place
+    await page.evaluate(stamp);
+    await page.locator('nav[aria-label="Primary"] a', { hasText: '文章' }).click();
+    await expect(page).toHaveURL(/\/zh-cn\/blog\.html$/);
+    await expect(page.locator('h1.display')).toContainText('文章');
+    expect(await page.evaluate(sentinel), 'no full reload occurred').toBe(true);
+
+    await page.locator('.lang a', { hasText: 'RU' }).click();
+    await expect(page).toHaveURL(/\/ru-ru\/blog\.html$/);
+    await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
+  });
+
+  test('after an in-place swap the new heading has the focus', async ({ page }) => {
+    // the keyboard and the screen reader continue from the new page's
+    // heading, not from the link that went away
+    await page.goto('/');
+    await page.evaluate(stamp);
+    await page.locator('nav[aria-label="Primary"] a', { hasText: 'Contact' }).click();
+    await expect(page).toHaveURL(/\/contact\.html$/);
+    await expect(page.locator('main h1')).toBeFocused();
+    expect(await page.evaluate(sentinel)).toBe(true);
+  });
+
+  test('back and forward return the reader to the place they left', async ({ page }) => {
+    await page.setViewportSize({ width: 1024, height: 700 });
+    await page.goto('/blog.html');
+    await page.evaluate(stamp);
+    const row = page.locator('.post-list .post-row').nth(6);
+    await row.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(400); // the place is saved once scrolling stops
+    const left = await page.evaluate(() => Math.round(window.scrollY));
+    expect(left, 'the index is scrolled').toBeGreaterThan(300);
+
+    await row.click();
+    await expect(page).toHaveURL(/\/blog\/.+\.html$/);
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(5);
+    await page.evaluate(() => window.scrollTo(0, 500));
+    await page.waitForTimeout(400);
+
+    await page.goBack();
+    await expect(page).toHaveURL(/\/blog\.html$/);
+    // within two pixels: sub-pixel layout may round the place either way
+    const near = (y) => page.evaluate((y) => Math.abs(window.scrollY - y) <= 2, y);
+    await expect.poll(() => near(left)).toBe(true);
+
+    await page.goForward();
+    await expect(page).toHaveURL(/\/blog\/.+\.html$/);
+    await expect.poll(() => near(500)).toBe(true);
+    expect(await page.evaluate(sentinel), 'history stayed within the page').toBe(true);
+  });
 });
