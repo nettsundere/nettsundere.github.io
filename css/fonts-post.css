@@ -11,18 +11,29 @@
 /* Sea of Love, the site's own font, sets this page's text in every language,
    as on the rest of the site. The same files and cache key as app.css. The
    specimens below keep the fonts that they show. */
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=27") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=27") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=27") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=27") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=32") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=32") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=32") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=32") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+
+/* Every character that the site's own pages do not ask for, in faces of
+   their own: the fonts page shows the whole font with them, and no other
+   page downloads these files. */
+@font-face { font-family: "Sea of Love Rest"; src: url("../fonts/sea-of-love/SeaofLove-Regular-rest.woff2?v=4") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love Rest"; src: url("../fonts/sea-of-love/SeaofLove-Bold-rest.woff2?v=4") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love Rest"; src: url("../fonts/sea-of-love/SeaofLove-Italic-rest.woff2?v=4") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love Rest"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic-rest.woff2?v=4") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
 
 :root {
   --ink: #16130f;
   --paper: #f6f3ec;
   --muted: #6b645a;
   --line: rgba(22, 19, 15, 0.16);
-  --serif: "Sea of Love", serif;
-  --mono: "Sea of Love", sans-serif;
+  /* This page shows the whole font: every character that the site's own
+     pages do not ask for comes from the rest faces, which only this page
+     downloads. */
+  --serif: "Sea of Love", "Sea of Love Rest", serif;
+  --mono: "Sea of Love", "Sea of Love Rest", sans-serif;
   --pad: clamp(1rem, 4vw, 3.5rem);
   --measure: 40rem;
 
