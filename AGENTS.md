@@ -181,7 +181,7 @@ Two stylesheets carry the design: `css/app.css@v=1.css` for every page, and `css
 **The signs of the site.**
 
 - **The red square.** The full stop of every big heading shows as a red square on the baseline. CSS draws it; the character stays in the text, for copying and for screen readers. On Chinese pages the character is 。, and the square sits low at the left of a full-width cell, where 。 sits. The same square marks the current page in the navigation.
-- **The red wave.** The line under each page's heading (`hr.rule-red`) is a sine wave. `images/sine-wave.svg` draws y = sin(x) over 64 periods with a 2-px stroke, and the CSS uses it as a mask over `--red`. The CSS sets the wavelength (about 32 px on a phone, 42 px at 1440 px) so that whole periods fill the line. So both ends fall on the midline, where a round cap closes each one. The wave does not move. Print shows a plain black line.
+- **The red wave.** The line under each page's heading (`hr.rule-red`) is a sine wave. `images/sine-wave.svg` draws y = sin(x) over 64 periods with a 2-px stroke in the brand red, and the CSS draws it as a background image (not a mask, which browsers block on pages opened as files). The CSS sets the wavelength (about 32 px on a phone, 42 px at 1440 px) so that whole periods fill the line. So both ends fall on the midline, where a round cap closes each one. The wave does not move. Print shows a plain black line.
 - The VK mark stands over the role at the top left. A vertical label runs down the hero's first column. The portrait is grey on a red block, and turns to colour on hover.
 
 **Links and focus.**

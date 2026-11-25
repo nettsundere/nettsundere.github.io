@@ -6,10 +6,10 @@
    same layers. */
 @layer reset, tokens, base, grid, type, components, utilities, motion, print;
 
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=36") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=36") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=36") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=36") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=38") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=38") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=38") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=38") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
 
 /* A link to another page of the site cross-fades in browsers that can,
    unless the person asked the system for reduced motion. */
@@ -336,8 +336,10 @@
   /* ---- rules ---- */
   .rule { grid-column: 1 / -1; height: 1px; background: var(--rule); border: 0; margin: 0; }
   /* The red line is a sine wave. images/sine-wave.svg draws y = sin(x)
-     over 64 periods with a 2-px stroke, and the CSS uses it as a mask over
-     the red, so the colour stays the --red token. The wavelength is set so
+     over 64 periods with a 2-px stroke in the brand red (#e3000f, the --red
+     token), and the CSS draws it as a background image. A background, unlike
+     a mask, also loads when the pages are opened as files (file://), where
+     the browser blocks a mask from another file. The wavelength is set so
      that whole periods fill the line, so both ends fall on the midline,
      where a 1-px round cap closes each one. The line runs from the left
      edge of the window to the right one: its grid area is centred, so a
@@ -354,19 +356,13 @@
     margin-inline: calc(50% - 50vw);   /* from window edge to window edge */
     padding-inline: 1px;     /* room for the round caps */
     border: 0;
-    background: var(--red);
-    -webkit-mask-image: url("../images/sine-wave.svg?v=2"), radial-gradient(circle closest-side, #000 60%, transparent), radial-gradient(circle closest-side, #000 60%, transparent);
-    mask-image: url("../images/sine-wave.svg?v=2"), radial-gradient(circle closest-side, #000 60%, transparent), radial-gradient(circle closest-side, #000 60%, transparent);
-    -webkit-mask-size: calc(var(--wave-length) * 64) 100%, 2px 2px, 2px 2px;
-    mask-size: calc(var(--wave-length) * 64) 100%, 2px 2px, 2px 2px;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: 0 0, 0 50%, 100% 50%;
-    mask-position: 0 0, 0 50%, 100% 50%;
-    -webkit-mask-origin: content-box, border-box, border-box;
-    mask-origin: content-box, border-box, border-box;
-    -webkit-mask-clip: content-box, border-box, border-box;
-    mask-clip: content-box, border-box, border-box;
+    background-color: transparent;
+    background-image: url("../images/sine-wave.svg?v=3"), radial-gradient(circle closest-side, var(--red) 60%, transparent), radial-gradient(circle closest-side, var(--red) 60%, transparent);
+    background-size: calc(var(--wave-length) * 64) 100%, 2px 2px, 2px 2px;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 50%, 100% 50%;
+    background-origin: content-box, border-box, border-box;
+    background-clip: content-box, border-box, border-box;
   }
 
   /* ---- hero: the vertical label, the display heading, the portrait ---- */
@@ -724,7 +720,7 @@
     .hero .gutter-label, .hero .portrait { display: none !important; }
     .site-header { padding: 0 0 6pt; }
     .rule, .rule-red { background: #000 !important; }
-    .rule-red { height: 1px; padding: 0; -webkit-mask-image: none !important; mask-image: none !important; }
+    .rule-red { height: 1px; padding: 0; }
     .hero { padding-block: 6pt; }
     .display { font-size: 28pt; text-box: normal; }
     .h1 { font-size: 18pt; }
