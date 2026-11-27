@@ -6,10 +6,10 @@
    same layers. */
 @layer reset, tokens, base, grid, type, components, utilities, motion, print;
 
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=38") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=38") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=38") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
-@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=38") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Regular.woff2?v=40") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Bold.woff2?v=40") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-Italic.woff2?v=40") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Sea of Love"; src: url("../fonts/sea-of-love/SeaofLove-BoldItalic.woff2?v=40") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
 
 /* A link to another page of the site cross-fades in browsers that can,
    unless the person asked the system for reduced motion. */
